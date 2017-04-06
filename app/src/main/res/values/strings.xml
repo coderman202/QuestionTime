@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Question Time!</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <string name="question1">What is the capital of Namibia?</string>
+    <string name="question2">Who wrote the novel 1984?</string>
+    <string name="question3">Who is the president of France?</string>
+    <string name="question4">Which English football team has won the most FA Cup trophies?</string>
+    <string name="question5">What is the largest animal in the world?</string>
+
+    <string-array name="questions">
+        <item>What is the capital of Namibia?</item>
+        <item>Who wrote the novel 1984?</item>
+        <item>Who is the president of France?</item>
+        <item>Which English football team has won the most FA Cup trophies?</item>
+        <item>What is the largest animal in the world?</item>
+    </string-array>
+</resources>
