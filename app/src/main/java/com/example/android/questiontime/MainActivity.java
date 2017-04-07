@@ -1,13 +1,13 @@
 package com.example.android.questiontime;
 
+import android.app.Dialog;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,9 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -39,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    public static String[] questions, answers;
+    public static String[] questions, answers, topics;
     public static String[][] options;
+
+    public static CheckBox[] topicsChoices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
 
         //Get arrays of possible questions, answers and options from resource file
         questions = getResources().getStringArray(R.array.questions);
@@ -89,17 +96,6 @@ public class MainActivity extends AppCompatActivity {
             options[index] = options[i];
             options[i] = os;
         }
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
 
 
@@ -117,8 +113,41 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
+        if (id == R.id.topics_options) {
+            // custom dialog
+            final Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.topics_menu);
+            dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels, getResources().getDisplayMetrics().heightPixels/2);
+            dialog.setTitle(R.string.topics_title);
+
+            LinearLayout checkboxGroup = (LinearLayout) dialog.findViewById(R.id.checkbox_group);
+
+            topics = getResources().getStringArray(R.array.question_topics);
+            for(String s:topics){
+                CheckBox cbTopic = new CheckBox(getApplicationContext());
+                cbTopic.setPadding(40, 10, 20, 10);
+                cbTopic.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+                cbTopic.setTextSize(16);
+                cbTopic.setText(s);
+                cbTopic.setOnClickListener(new View.OnClickListener(){
+                    public void onClick(View v){
+                        Toast.makeText(getApplicationContext(), "You chose: ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                checkboxGroup.addView(cbTopic);
+            }
+
+            Button dialogButton = (Button) dialog.findViewById(R.id.dialog_button_ok);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
             return true;
         }
 
@@ -154,12 +183,21 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(questions[getArguments().getInt(ARG_SECTION_NUMBER) - 1]);
+
+            //int to store the section number for selecting the question and answers to put in
+            int secNum = getArguments().getInt(ARG_SECTION_NUMBER);
+
+            //Initialise TextViews for questions and populate them with string resource text
+            TextView questionView = (TextView) rootView.findViewById(R.id.question);
+            questionView.setText(questions[secNum - 1]);
+            TextView questionNum = (TextView) rootView.findViewById(R.id.question_header);
+            questionNum.setText(getString(R.string.question_header, ""+secNum));
+
+            //Initialise the RadioButton group of possible answers for each question
             RadioGroup rg = (RadioGroup) rootView.findViewById(R.id.options);
             for(int i = 0; i < rg.getChildCount(); i++){
                 RadioButton rbn = (RadioButton) rg.getChildAt(i);
-                rbn.setText(options[getArguments().getInt(ARG_SECTION_NUMBER) - 1][i]);
+                rbn.setText(options[secNum - 1][i]);
             }
 
             return rootView;

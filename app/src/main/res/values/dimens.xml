@@ -6,4 +6,10 @@
     <dimen name="appbar_padding_top">8dp</dimen>
 
     <dimen name="question_text_size">25sp</dimen>
+
+    <dimen name="question_num_text_size">30sp</dimen>
+    <dimen name="question_num_padding">12dp</dimen>
+
+    <dimen name="radio_group_padding">25dp</dimen>
+    <dimen name="radio_button_padding">8dp</dimen>
 </resources>

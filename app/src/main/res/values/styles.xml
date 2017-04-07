@@ -17,9 +17,28 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="QuestionNumberStyle">
+        <item name="android:textSize">@dimen/question_num_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/question_num_padding</item>
+    </style>
+
     <style name="QuestionStyle">
         <item name="android:textSize">@dimen/question_text_size</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="RadioGroup">
+        <item name="android:paddingTop">@dimen/radio_group_padding</item>
+    </style>
+
+    <style name="OptionsStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textSize">@dimen/question_text_size</item>
+        <item name="android:paddingBottom">@dimen/radio_button_padding</item>
+    </style>
+
+    <style name="CheckBoxGroup">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

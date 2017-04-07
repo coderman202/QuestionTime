@@ -8,39 +8,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.questiontime.MainActivity$PlaceholderFragment">
 
-    <TextView style="@style/QuestionStyle"
-        android:id="@+id/section_label"
+    <TextView style="@style/QuestionNumberStyle"
+        android:id="@+id/question_header"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"/>
 
-    <RadioGroup
+    <TextView style="@style/QuestionStyle"
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question_header"
+        android:layout_centerHorizontal="true"/>
+
+    <RadioGroup style="@style/RadioGroup"
         android:id="@+id/options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/section_label">
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
-        <RadioButton
+        <RadioButton style="@style/OptionsStyle"
             android:id="@+id/option1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <RadioButton
+        <RadioButton style="@style/OptionsStyle"
             android:id="@+id/option2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <RadioButton
+        <RadioButton style="@style/OptionsStyle"
             android:id="@+id/option3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <RadioButton
+        <RadioButton style="@style/OptionsStyle"
             android:id="@+id/option4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </RadioGroup>
-
-
 
 </RelativeLayout>
