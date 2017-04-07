@@ -8,10 +8,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.questiontime.MainActivity$PlaceholderFragment">
 
-    <TextView
+    <TextView style="@style/QuestionStyle"
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <RadioGroup
+        android:id="@+id/options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/section_label">
+
+        <RadioButton
+            android:id="@+id/option1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/option2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/option3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/option4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
 
 
 

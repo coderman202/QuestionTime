@@ -13,8 +13,61 @@
     <string-array name="questions">
         <item>What is the capital of Namibia?</item>
         <item>Who wrote the novel 1984?</item>
-        <item>Who is the president of France?</item>
+        <item>Who is the president of Ireland?</item>
         <item>Which English football team has won the most FA Cup trophies?</item>
         <item>What is the largest animal in the world?</item>
     </string-array>
+
+
+    <string-array name="answers">
+        <item>Windhoek</item>
+        <item>George Orwell</item>
+        <item>Michael D. Higgins</item>
+        <item>Arsenal</item>
+        <item>Blue Whale</item>
+    </string-array>
+
+    <string-array name="answer1_options">
+        <item>Windhoek</item>
+        <item>Namibia City</item>
+        <item>Cairo</item>
+        <item>Addis Ababa</item>
+    </string-array>
+
+    <string-array name="answer2_options">
+        <item>John Steinbeck</item>
+        <item>George Orwell</item>
+        <item>Ernest Hemingway</item>
+        <item>Mark Twain</item>
+    </string-array>
+
+    <string-array name="answer3_options">
+        <item>Mary McAleese</item>
+        <item>David Cameron</item>
+        <item>Mary Robinson</item>
+        <item>Michael D. Higgins</item>
+    </string-array>
+
+    <string-array name="answer4_options">
+        <item>Manchester United</item>
+        <item>Arsenal</item>
+        <item>Liverpool</item>
+        <item>Chelsea</item>
+    </string-array>
+
+    <string-array name="answer5_options">
+        <item>Indian Elephant</item>
+        <item>Blue Whale</item>
+        <item>Hippopotamus</item>
+        <item>Rhinoceros</item>
+    </string-array>
+
+    <array name="options">
+        <item>@array/answer1_options</item>
+        <item>@array/answer2_options</item>
+        <item>@array/answer3_options</item>
+        <item>@array/answer4_options</item>
+        <item>@array/answer5_options</item>
+    </array>
+
 </resources>

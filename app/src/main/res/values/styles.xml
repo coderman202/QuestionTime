@@ -17,4 +17,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="QuestionStyle">
+        <item name="android:textSize">@dimen/question_text_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

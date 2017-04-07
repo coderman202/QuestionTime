@@ -1,5 +1,7 @@
 package com.example.android.questiontime;
 
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -35,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    public static String[] questions;
+    public static String[] questions, answers;
+    public static String[][] options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +57,37 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        //Get array of possible questions from resource file and shuffle it randomly
+        //Get arrays of possible questions, answers and options from resource file
         questions = getResources().getStringArray(R.array.questions);
+        answers = getResources().getStringArray(R.array.answers);
+
+        Resources res = getResources();
+        TypedArray ta = res.obtainTypedArray(R.array.options);
+        int n = ta.length();
+        options = new String[n][];
+        for (int i = 0; i < n; ++i) {
+            int id = ta.getResourceId(i, 0);
+            if (id > 0) {
+                options[i] = res.getStringArray(id);
+            } else {
+                // something wrong with the XML
+            }
+        }
+        ta.recycle(); // Important!
         Random rnd = new Random();
         for(int i = questions.length - 1; i > 0; i--){
             int index = rnd.nextInt(i + 1);
-            String str = questions[index];
+            String qs = questions[index];
             questions[index] = questions[i];
-            questions[i] = str;
+            questions[i] = qs;
+
+            String as = answers[index];
+            answers[index] = answers[i];
+            answers[i] = as;
+
+            String[] os = options[index];
+            options[index] = options[i];
+            options[i] = os;
         }
 
 
@@ -127,8 +155,13 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-
             textView.setText(questions[getArguments().getInt(ARG_SECTION_NUMBER) - 1]);
+            RadioGroup rg = (RadioGroup) rootView.findViewById(R.id.options);
+            for(int i = 0; i < rg.getChildCount(); i++){
+                RadioButton rbn = (RadioButton) rg.getChildAt(i);
+                rbn.setText(options[getArguments().getInt(ARG_SECTION_NUMBER) - 1][i]);
+            }
+
             return rootView;
         }
     }
