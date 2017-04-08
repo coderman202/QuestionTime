@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/questions_fragment"
     tools:context="com.example.android.questiontime.MainActivity$PlaceholderFragment">
 
     <TextView style="@style/QuestionNumberStyle"
@@ -28,26 +29,25 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
-        <RadioButton style="@style/OptionsStyle"
-            android:id="@+id/option1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RadioButton style="@style/OptionsStyle" />
 
-        <RadioButton style="@style/OptionsStyle"
-            android:id="@+id/option2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RadioButton style="@style/OptionsStyle" />
 
-        <RadioButton style="@style/OptionsStyle"
-            android:id="@+id/option3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RadioButton style="@style/OptionsStyle" />
 
-        <RadioButton style="@style/OptionsStyle"
-            android:id="@+id/option4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RadioButton style="@style/OptionsStyle" />
 
     </RadioGroup>
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:layout_below="@id/options"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"
+        android:paddingTop="@dimen/submit_button_top_padding"
+        android:onClick="compareAnswers"/>
 
 </RelativeLayout>

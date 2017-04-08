@@ -2,14 +2,17 @@
     <string name="app_name">Question Time!</string>
 
     <string name="topics_options">Choose Topics</string>
+    <string name="topics_title">Topics Selection</string>
 
     <string name="profile_options">Profile</string>
+    <string name="profile_title">Profile Settings</string>
+    <string name="username">Enter Username</string>
 
     <string name="question_header">
         Question <xliff:g id="q_number" example="1">%s</xliff:g>:
     </string>
 
-    <string name="topics_title">Topics Selection</string>
+    <string name="submit">Submit Answers</string>
 
     <string-array name="question_topics">
         <item>Sports</item>
@@ -23,10 +26,81 @@
         <item>Food and Drink</item>
     </string-array>
 
-    <string name="section_number">
-        <xliff:g id="sec_num" example="2">%s</xliff:g>/
-        <xliff:g id="sec_tot" example="10">%s</xliff:g>
-    </string>
+    <string-array name="sports_questions">
+        <item>How many teams are there in the English Premier League?</item>
+        <item>Which male tennis player holds the record for 36 consecutive grand slam quarter finals?</item>
+        <item>Which NBA player holds the record for the most 3-pointers in a single season?</item>
+        <item>Who is South Africa\'s leading try scorer in rugby union?</item>
+        <item>Which female tennis player holds the record for the most singles titles in the open era?</item>
+        <item>Who is the all-time top goalscorer for the Spanish national football team?</item>
+        <item>Which team did the San Francisco Giants beat to win the world series in 2014?</item>
+        <item>Which country hosted the 2008 Summer Olympics?</item>
+        <item>Who won the snooker world championship in the 2010?</item>
+        <item>Who holds the current women\'s 400m world record as of 2017?</item>
+    </string-array>
+
+    <string-array name="sports_answers">
+        <item>20</item>
+        <item>Roger Federer</item>
+        <item>Stephan Curry</item>
+        <item>Brian Habana</item>
+        <item>Martina Navratilova</item>
+        <item>David Villa</item>
+        <item>Kansas City Royals</item>
+        <item>Beijing</item>
+        <item>Neil Robertson</item>
+        <item>Marita Koch</item>
+    </string-array>
+
+    <string-array name="geography_questions">
+        <item>What is the capital of Namibia?</item>
+        <item>What is the world\'s longest river?</item>
+        <item>What is the most populous country in Africa?</item>
+        <item>What is the highest peak in Europe?</item>
+        <item>What is the world\'s deepest lake?</item>
+        <item>What is the capital of Peru?</item>
+        <item>In what year did Latvia become an EU member state?</item>
+        <item>How many states are the in the USA?</item>
+        <item>Lanzarote is a member of which island group?</item>
+        <item>Which is the largest of the Great Lakes in North America?</item>
+    </string-array>
+
+    <string-array name="geography_answers">
+        <item>Windhoek</item>
+        <item>Amazon</item>
+        <item>Nigeria</item>
+        <item>Mount Elbrus</item>
+        <item>Lake Baikal</item>
+        <item>Lima</item>
+        <item>2004</item>
+        <item>52</item>
+        <item>Canary Islands</item>
+        <item>Lake Superior</item>
+    </string-array>
+
+    <string-array name="history_questions">
+        <item>In what year did the Titanic sink?</item>
+        <item>For how many years did the Hundred Years War last?</item>
+        <item>The Great Pyramid of Giza is located in what Egyptian city?</item>
+        <item>What was the name of the US research and development project to create nuclear weapons in WWII?</item>
+        <item>Napoleon suffered defeat at Waterloo in what year?</item>
+        <item>Brazil was once a colony of which European country?</item>
+        <item>Which Patriot leader organized the Boston Tea Party in 1773?</item>
+        <item>In what year did Fidel Castro die?</item>
+        <item>Who was the mayor of New York City during the September 11 attacks in 2001?</item>
+    </string-array>
+
+    <string-array name="history_answers">
+        <item>1912</item>
+        <item>116</item>
+        <item>Giza</item>
+        <item>Manhattan Project</item>
+        <item>1815</item>
+        <item>Portugal</item>
+        <item>Samuel Adams</item>
+        <item>2016</item>
+        <item>Rudy Giuliani</item>
+    </string-array>
 
     <string-array name="questions">
         <item>What is the capital of Namibia?</item>
@@ -35,7 +109,6 @@
         <item>Which English football team has won the most FA Cup trophies?</item>
         <item>What is the largest animal in the world?</item>
     </string-array>
-
 
     <string-array name="answers">
         <item>Windhoek</item>
