@@ -16,12 +16,12 @@
 
     <string-array name="question_topics">
         <item>Sports</item>
-        <item>History</item>
         <item>Geography</item>
+        <item>History</item>
+        <item>Science</item>
+        <item>Music</item>
         <item>Arts</item>
         <item>General Knowledge</item>
-        <item>Music</item>
-        <item>Science</item>
         <item>Animals</item>
         <item>Food and Drink</item>
     </string-array>
@@ -42,8 +42,8 @@
     <string-array name="sports_answers">
         <item>20</item>
         <item>Roger Federer</item>
-        <item>Stephan Curry</item>
-        <item>Brian Habana</item>
+        <item>Stephen Curry</item>
+        <item>Bryan Habana</item>
         <item>Martina Navratilova</item>
         <item>David Villa</item>
         <item>Kansas City Royals</item>
@@ -51,6 +51,62 @@
         <item>Neil Robertson</item>
         <item>Marita Koch</item>
     </string-array>
+
+    <string-array name="sports_q1_options">
+        <item>20</item><item>18</item><item>16</item><item>22</item>
+    </string-array>
+
+    <string-array name="sports_q2_options">
+        <item>Roger Federer</item><item>Rafael Nadal</item>
+        <item>Pete Sampras</item><item>Jimmy Connors</item>
+    </string-array>
+
+    <string-array name="sports_q3_options">
+        <item>Stephen Curry</item><item>Ray Allen</item>
+        <item>Clay Thompson</item><item>Kobe Bryant</item>
+    </string-array>
+
+    <string-array name="sports_q4_options">
+        <item>Bryan Habana</item><item>Joost van der Westhuizen</item>
+        <item>Jaque Fourie</item><item>JP Pietersen</item>
+    </string-array>
+
+    <string-array name="sports_q5_options">
+        <item>Martina Navratilova</item><item>Serena Williams</item>
+        <item>Steffi Graf</item><item>Jennifer Capriati</item>
+    </string-array>
+
+    <string-array name="sports_q6_options">
+        <item>David Villa</item><item>Fernando Torres</item>
+        <item>David Silva</item><item>Raúl</item>
+    </string-array>
+
+    <string-array name="sports_q7_options">
+        <item>Kansas City Royals</item><item>Detroit Tigers</item>
+        <item>New York Yankees</item><item>Boston Red Sox</item>
+    </string-array>
+
+    <string-array name="sports_q8_options">
+        <item>Beijing</item><item>Sydney</item><item>London</item><item>Barcelona</item>
+    </string-array>
+
+    <string-array name="sports_q9_options">
+        <item>Neil Robertson</item><item>Ronnie O\'Sullivan</item>
+        <item>Mark Williams</item><item>Graeme Dott</item>
+    </string-array>
+
+    <string-array name="sports_q10_options">
+        <item>Marita Koch</item><item>Allyson Felix</item>
+        <item>Shaunae Miller</item><item>Sanya Richards-Ross</item>
+    </string-array>
+
+    <array name="sports_options">
+        <item>@array/sports_q1_options</item><item>@array/sports_q2_options</item>
+        <item>@array/sports_q3_options</item><item>@array/sports_q4_options</item>
+        <item>@array/sports_q5_options</item><item>@array/sports_q6_options</item>
+        <item>@array/sports_q7_options</item><item>@array/sports_q8_options</item>
+        <item>@array/sports_q9_options</item><item>@array/sports_q10_options</item>
+    </array>
 
     <string-array name="geography_questions">
         <item>What is the capital of Namibia?</item>
@@ -73,21 +129,75 @@
         <item>Lake Baikal</item>
         <item>Lima</item>
         <item>2004</item>
-        <item>52</item>
+        <item>50</item>
         <item>Canary Islands</item>
         <item>Lake Superior</item>
     </string-array>
+
+    <string-array name="geography_q1_options">
+        <item>Windhoek</item><item>Namibia City</item><item>Cairo</item><item>Addis Ababa</item>
+    </string-array>
+
+    <string-array name="geography_q2_options">
+        <item>Amazon</item><item>Nile</item><item>Ganges</item><item>Danube</item>
+    </string-array>
+
+    <string-array name="geography_q3_options">
+        <item>Nigeria</item><item>South Africa</item><item>Egypt</item><item>Somalia</item>
+    </string-array>
+
+    <string-array name="geography_q4_options">
+        <item>Mount Elbrus</item><item>Mont Blanc</item>
+        <item>Mount Etna</item><item>Mount Ararat</item>
+    </string-array>
+
+    <string-array name="geography_q5_options">
+        <item>Lake Baikal</item><item>Lake Superior</item>
+        <item>Caspian Sea</item><item>Lake Victoria</item>
+    </string-array>
+
+    <string-array name="geography_q6_options">
+        <item>Lima</item><item>Quito</item><item>La Paz</item><item>Santiago</item>
+    </string-array>
+
+    <string-array name="geography_q7_options">
+        <item>2004</item><item>1998</item>
+        <item>2008</item><item>They aren\'t in the EU</item>
+    </string-array>
+
+    <string-array name="geography_q8_options">
+        <item>52</item><item>49</item><item>50</item><item>51</item>
+    </string-array>
+
+    <string-array name="geography_q9_options">
+        <item>Canary Islands</item><item>Balearic Islands</item>
+        <item>Lanzarote Islands</item><item>Pelagie Islands</item>
+    </string-array>
+
+    <string-array name="geography_q10_options">
+        <item>Lake Superior</item><item>Lake Huron</item>
+        <item>Lake Michigan</item><item>Lake Erie</item>
+    </string-array>
+
+    <array name="geography_options">
+        <item>@array/geography_q1_options</item><item>@array/geography_q2_options</item>
+        <item>@array/geography_q3_options</item><item>@array/geography_q4_options</item>
+        <item>@array/geography_q5_options</item><item>@array/geography_q6_options</item>
+        <item>@array/geography_q7_options</item><item>@array/geography_q8_options</item>
+        <item>@array/geography_q9_options</item><item>@array/geography_q10_options</item>
+    </array>
 
     <string-array name="history_questions">
         <item>In what year did the Titanic sink?</item>
         <item>For how many years did the Hundred Years War last?</item>
         <item>The Great Pyramid of Giza is located in what Egyptian city?</item>
-        <item>What was the name of the US research and development project to create nuclear weapons in WWII?</item>
+        <item>What was the name of the US research project to create nuclear weapons in WWII?</item>
         <item>Napoleon suffered defeat at Waterloo in what year?</item>
         <item>Brazil was once a colony of which European country?</item>
         <item>Which Patriot leader organized the Boston Tea Party in 1773?</item>
         <item>In what year did Fidel Castro die?</item>
         <item>Who was the mayor of New York City during the September 11 attacks in 2001?</item>
+        <item>Abraham Lincoln was assassinated in what year?</item>
     </string-array>
 
     <string-array name="history_answers">
@@ -100,6 +210,238 @@
         <item>Samuel Adams</item>
         <item>2016</item>
         <item>Rudy Giuliani</item>
+        <item>1865</item>
+    </string-array>
+
+    <string-array name="history_q1_options">
+        <item>1912</item><item>1922</item><item>1914</item><item>1905</item>
+    </string-array>
+
+    <string-array name="history_q2_options">
+        <item>116</item><item>100</item><item>99</item><item>200</item>
+    </string-array>
+
+    <string-array name="history_q3_options">
+        <item>Giza</item><item>Tunis</item><item>Cairo</item><item>Alexandria</item>
+    </string-array>
+
+    <string-array name="history_q4_options">
+        <item>Manhattan Project</item><item>Brooklyn Research</item>
+        <item>Manhattan Program</item><item>Pentagon Research</item>
+    </string-array>
+
+    <string-array name="history_q5_options">
+        <item>1815</item><item>1915</item><item>1715</item><item>1615</item>
+    </string-array>
+
+    <string-array name="history_q6_options">
+        <item>Portugal</item><item>Spain</item><item>France</item><item>Great Britain</item>
+    </string-array>
+
+    <string-array name="history_q7_options">
+        <item>Samuel Adams</item><item>Abraham Lincoln</item>
+        <item>John Adams</item><item>George Washington</item>
+    </string-array>
+
+    <string-array name="history_q8_options">
+        <item>2016</item><item>2006</item><item>1996</item><item>2000</item>
+    </string-array>
+
+    <string-array name="history_q9_options">
+        <item>Rudy Giuliani</item><item>Michael Bloomberg</item>
+        <item>Hilary Clinton</item><item>David Dinkins</item>
+    </string-array>
+
+    <string-array name="history_q10_options">
+        <item>1865</item><item>1880</item><item>1845</item><item>1875</item>
+    </string-array>
+
+    <array name="history_options">
+        <item>@array/history_q1_options</item><item>@array/history_q2_options</item>
+        <item>@array/history_q3_options</item><item>@array/history_q4_options</item>
+        <item>@array/history_q5_options</item><item>@array/history_q6_options</item>
+        <item>@array/history_q7_options</item><item>@array/history_q8_options</item>
+        <item>@array/history_q9_options</item><item>@array/history_q10_options</item>
+    </array>
+
+    <string-array name="science_questions">
+        <item>How many furlongs are in 1 mile?</item>
+        <item>Who came up with the theories of General and Special relativity?</item>
+        <item>What is the second most abundant element in the universe?</item>
+        <item>Which psychologist investigated obedience using electric shocks?</item>
+        <item>What vitamin is produced when a person is exposed to sunlight?</item>
+        <item>What is the name for a protein that acts as a biological catalyst?</item>
+        <item>Which planet in our solar system has the most oxygen?</item>
+        <item>The European Organization for Nuclear Research is known by what acronym?</item>
+        <item>What are the three base units of measurement in the metric system?</item>
+        <item>How many planets in our solar system have moons?</item>
+    </string-array>
+
+    <string-array name="science_answers">
+        <item>8</item>
+        <item>Albert Einstein</item>
+        <item>Hydrogen</item>
+        <item>Stanley Milgram</item>
+        <item>Vitamin D</item>
+        <item>Enzyme</item>
+        <item>Earth</item>
+        <item>CERN</item>
+        <item>Metre, Litre and Gram</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="science_q1_options">
+        <item>8</item><item>18</item><item>12</item><item>9</item>
+    </string-array>
+
+    <string-array name="science_q2_options">
+        <item>Albert Einstein</item><item>Niels Bohr</item>
+        <item>Issac Newton</item><item>Stephen Hawking</item>
+    </string-array>
+
+    <string-array name="science_q3_options">
+        <item>Hydrogen</item><item>Oxygen</item><item>Nitrogen</item><item>Carbon</item>
+    </string-array>
+
+    <string-array name="science_q4_options">
+        <item>Stanley Milgram</item><item>Wilhelm Reich</item>
+        <item>George H. Mead</item><item>George Milgram</item>
+    </string-array>
+
+    <string-array name="science_q5_options">
+        <item>Vitamin D</item><item>Vitamin E</item><item>Vitamin B</item><item>Vitamin C</item>
+    </string-array>
+
+    <string-array name="science_q6_options">
+        <item>Enzyme</item><item>Glucose</item><item>Adrenalin</item><item>Testosterone</item>
+    </string-array>
+
+    <string-array name="science_q7_options">
+        <item>Earth</item><item>Mars</item><item>Neptune</item><item>Venus</item>
+    </string-array>
+
+    <string-array name="science_q8_options">
+        <item>CERN</item><item>EORN</item><item>CREN</item><item>NROE</item>
+    </string-array>
+
+    <string-array name="science_q9_options">
+        <item>Metre, Litre and Gram</item><item>Metre, Inch and Ounce</item>
+        <item>Foot, Pint and Ounce</item><item>Metre, Kilogram and Litre</item>
+    </string-array>
+
+    <string-array name="science_q10_options">
+        <item>6</item><item>9</item><item>4</item><item>1</item>
+    </string-array>
+
+    <array name="science_options">
+        <item>@array/science_q1_options</item><item>@array/science_q2_options</item>
+        <item>@array/science_q3_options</item><item>@array/science_q4_options</item>
+        <item>@array/science_q5_options</item><item>@array/science_q6_options</item>
+        <item>@array/science_q7_options</item><item>@array/science_q8_options</item>
+        <item>@array/science_q9_options</item><item>@array/science_q10_options</item>
+    </array>
+
+    <string-array name="music_questions">
+        <item>Who is the lead singer for the American rock band Pearl Jam?</item>
+        <item>In what year was Nirvana\'s first album, Bleach, released?</item>
+        <item>What was the highest selling album of the 1980s in the United States?</item>
+        <item>"Hallelujah" is a song written by which Canadian recording artist?</item>
+        <item>In what year did Elvis Presley die?</item>
+        <item>In what city was Ludwig van Beethoven born?</item>
+        <item>New Orleans is known as the birthplace of what type of music?</item>
+        <item>Who was the lead singer of the rock band Queen?</item>
+        <item>ABBA was a pop group from what country?</item>
+        <item>Which Italian composer won an Academy Award for The Hateful Eight score?</item>
+    </string-array>
+
+    <string-array name="music_answers">
+        <item>Eddie Vedder</item>
+        <item>1989</item>
+        <item>Thriller</item>
+        <item>Leonard Cohen</item>
+        <item>1977</item>
+        <item>Bonn</item>
+        <item>Jazz</item>
+        <item>Freddie Mercury</item>
+        <item>Sweden</item>
+        <item>Ennio Morricone</item>
+    </string-array>
+
+    <string-array name="music_q1_options">
+        <item>Eddie Vedder</item><item>Chris Cornell</item>
+        <item>Mike McCready</item><item>Billy Corgan</item>
+    </string-array>
+
+    <string-array name="music_q2_options">
+        <item>1989</item><item>1991</item><item>1999</item><item>1993</item>
+    </string-array>
+
+    <string-array name="music_q3_options">
+        <item>Thriller</item><item>Born in the USA</item>
+        <item>Purple Rain</item><item>The Joshua Tree</item>
+    </string-array>
+
+    <string-array name="music_q4_options">
+        <item>Leonard Cohen</item><item>Neil Young</item>
+        <item>Celine Dion</item><item>Bryan Adams</item>
+    </string-array>
+
+    <string-array name="music_q5_options">
+        <item>1977</item><item>1983</item><item>1973</item><item>1967</item>
+    </string-array>
+
+    <string-array name="music_q6_options">
+        <item>Bonn</item><item>Vienna</item><item>Berlin</item><item>Prague</item>
+    </string-array>
+
+    <string-array name="music_q7_options">
+        <item>Jazz</item><item>Blues</item><item>Soul</item><item>Rock</item>
+    </string-array>
+
+    <string-array name="music_q8_options">
+        <item>Freddie Mercury</item><item>David Bowie</item>
+        <item>Freddie Venus</item><item>Mick Jagger</item>
+    </string-array>
+
+    <string-array name="music_q9_options">
+        <item>Sweden</item><item>Norway</item><item>Denmark</item><item>Finland</item>
+    </string-array>
+
+    <string-array name="music_q10_options">
+        <item>Ennio Morricone</item><item>Ludovico Einaudi</item>
+        <item>Marco Ambrosini</item><item>Paolo Longo</item>
+    </string-array>
+
+    <array name="music_options">
+        <item>@array/music_q1_options</item><item>@array/music_q2_options</item>
+        <item>@array/music_q3_options</item><item>@array/music_q4_options</item>
+        <item>@array/music_q5_options</item><item>@array/music_q6_options</item>
+        <item>@array/music_q7_options</item><item>@array/music_q8_options</item>
+        <item>@array/music_q9_options</item><item>@array/music_q10_options</item>
+    </array>
+
+    <string-array name="all_questions">
+        <item>@array/sports_questions</item>
+        <item>@array/geography_questions</item>
+        <item>@array/history_questions</item>
+        <item>@array/science_questions</item>
+        <item>@array/music_questions</item>
+    </string-array>
+
+    <string-array name="all_answers">
+        <item>@array/sports_answers</item>
+        <item>@array/geography_answers</item>
+        <item>@array/history_answers</item>
+        <item>@array/science_answers</item>
+        <item>@array/music_answers</item>
+    </string-array>
+
+    <string-array name="all_options">
+        <item>@array/sports_options</item>
+        <item>@array/geography_options</item>
+        <item>@array/history_options</item>
+        <item>@array/science_options</item>
+        <item>@array/music_options</item>
     </string-array>
 
     <string-array name="questions">

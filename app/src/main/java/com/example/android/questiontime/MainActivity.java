@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -52,8 +54,12 @@ public class MainActivity extends AppCompatActivity {
     public static String[] questions, submissions, answers, topics;
     public static String[][] options;
 
+    public static String[][] allQuestions, allAnswers;
+
     public EditText username;
     public String user;
+
+    public CoordinatorLayout mainLayout;
 
     public static CheckBox[] topicsChoices;
 
@@ -73,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        mainLayout = (CoordinatorLayout) findViewById(R.id.main_content);
 
 
         //Get arrays of possible questions, answers and options from resource file
@@ -95,7 +103,42 @@ public class MainActivity extends AppCompatActivity {
         }
         ta.recycle();
 
+        TypedArray qa = res.obtainTypedArray(R.array.all_questions);
+        n = qa.length();
+        allQuestions = new String[n][];
+        for (int i = 0; i < n; ++i) {
+            int id = qa.getResourceId(i, 0);
+            allQuestions[i] = res.getStringArray(id);
+        }
+        qa.recycle();
+
+        TypedArray aa = res.obtainTypedArray(R.array.all_answers);
+        n = qa.length();
+        allAnswers = new String[n][];
+        for (int i = 0; i < n; ++i) {
+            int id = aa.getResourceId(i, 0);
+            allAnswers[i] = res.getStringArray(id);
+        }
+        aa.recycle();
+
         Random rnd = new Random();
+        for(int j = 0; j < allQuestions.length; j++){
+            for(int i = allQuestions[j].length - 1; i > 0; i--){
+                int index = rnd.nextInt(i + 1);
+                String qs = allQuestions[j][index];
+                allQuestions[j][index] = allQuestions[j][i];
+                allQuestions[j][i] = qs;
+
+                String as = allAnswers[j][index];
+                allAnswers[j][index] = allAnswers[j][i];
+                allAnswers[j][i] = as;
+
+                Log.d("question: ", allQuestions[j][i]);
+                Log.d("answer: ", allAnswers[j][i]);
+            }
+        }
+
+
         for(int i = questions.length - 1; i > 0; i--){
             int index = rnd.nextInt(i + 1);
             String qs = questions[index];
@@ -221,15 +264,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void compareAnswers(View v){
+        playerScore = 0;
         for(int i = 0; i < submissions.length; i++){
 
             if(submissions[i].equals(answers[i])){
                 playerScore++;
             }
-
         }
-
-        Toast.makeText(this, "You scored: " + playerScore + " out of 5", Toast.LENGTH_SHORT).show();
+        Snackbar.make(mainLayout, "You scored: " + playerScore + " out of 5", Snackbar.LENGTH_LONG).show();
     }
 
 
