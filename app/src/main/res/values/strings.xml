@@ -12,7 +12,7 @@
         Question <xliff:g id="q_number" example="1">%s</xliff:g>:
     </string>
 
-    <string name="submit">Submit Answers</string>
+    <string name="submit">Finish</string>
 
     <string-array name="question_topics">
         <item>Sports</item>

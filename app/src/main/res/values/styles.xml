@@ -29,7 +29,8 @@
     </style>
 
     <style name="RadioGroup">
-        <item name="android:paddingTop">@dimen/radio_group_padding</item>
+        <item name="android:paddingTop">@dimen/radio_group_padding_top</item>
+        <item name="android:paddingBottom">@dimen/radio_group_padding_bottom</item>
     </style>
 
     <style name="OptionsStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">

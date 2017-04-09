@@ -48,7 +48,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:visibility="gone"
-        android:paddingTop="@dimen/submit_button_top_padding"
+        android:textColor="@color/submitButtonTextColor"
+        android:background="@color/submitButtonbgColor"
         android:onClick="compareAnswers"/>
 
 </RelativeLayout>

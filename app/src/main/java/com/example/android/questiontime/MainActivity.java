@@ -10,7 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -51,19 +49,20 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    public static String[] questions, submissions, answers, topics;
-    public static String[][] options;
-
+    //String Arrays for storing all questions, answers and options
     public static String[][] allQuestions, allAnswers;
+    public static String[][][] allOptions;
+
+    //Using an array of custom Question class Questions for combining all
+    // questions with their relevant answers and options
+    public static Question[] questionArray;
 
     public EditText username;
     public String user;
 
     public CoordinatorLayout mainLayout;
 
-    public static CheckBox[] topicsChoices;
-
-    public static int playerScore = 0;
+    public int playerScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -82,29 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
         mainLayout = (CoordinatorLayout) findViewById(R.id.main_content);
 
-
-        //Get arrays of possible questions, answers and options from resource file
-        questions = getResources().getStringArray(R.array.questions);
-        answers = getResources().getStringArray(R.array.answers);
-
-        submissions = new String[answers.length];
-
-        for(int i = 0; i < answers.length; i++){
-            submissions[i] = " ";
-        }
-
         Resources res = getResources();
-        TypedArray ta = res.obtainTypedArray(R.array.options);
-        int n = ta.length();
-        options = new String[n][];
-        for (int i = 0; i < n; ++i) {
-            int id = ta.getResourceId(i, 0);
-            options[i] = res.getStringArray(id);
-        }
-        ta.recycle();
-
         TypedArray qa = res.obtainTypedArray(R.array.all_questions);
-        n = qa.length();
+        int n = qa.length();
         allQuestions = new String[n][];
         for (int i = 0; i < n; ++i) {
             int id = qa.getResourceId(i, 0);
@@ -113,13 +93,28 @@ public class MainActivity extends AppCompatActivity {
         qa.recycle();
 
         TypedArray aa = res.obtainTypedArray(R.array.all_answers);
-        n = qa.length();
+        n = aa.length();
         allAnswers = new String[n][];
         for (int i = 0; i < n; ++i) {
             int id = aa.getResourceId(i, 0);
             allAnswers[i] = res.getStringArray(id);
         }
         aa.recycle();
+
+        TypedArray oa = res.obtainTypedArray(R.array.all_options);
+        n = oa.length();
+        allOptions = new String[n][10][];
+        for (int i = 0; i < n; ++i) {
+            int id = oa.getResourceId(i, 0);
+            TypedArray oaInner = res.obtainTypedArray(id);
+            int m = oaInner.length();
+            for(int j = 0; j < m; j++){
+                id = oaInner.getResourceId(j,0);
+                allOptions[i][j] = res.getStringArray(id);
+            }
+            oaInner.recycle();
+        }
+        oa.recycle();
 
         Random rnd = new Random();
         for(int j = 0; j < allQuestions.length; j++){
@@ -133,25 +128,28 @@ public class MainActivity extends AppCompatActivity {
                 allAnswers[j][index] = allAnswers[j][i];
                 allAnswers[j][i] = as;
 
-                Log.d("question: ", allQuestions[j][i]);
-                Log.d("answer: ", allAnswers[j][i]);
+                String[] os = allOptions[j][index];
+                allOptions[j][index] = allOptions[j][i];
+                allOptions[j][i] = os;
+
+                for(int k = 0; k < allOptions[j][i].length; k++){
+                    int ind = rnd.nextInt(k + 1);
+                    String opt = allOptions[j][i][ind];
+                    allOptions[j][i][ind] = allOptions[j][i][k];
+                    allOptions[j][i][k] = opt;
+                }
             }
         }
 
-
-        for(int i = questions.length - 1; i > 0; i--){
-            int index = rnd.nextInt(i + 1);
-            String qs = questions[index];
-            questions[index] = questions[i];
-            questions[i] = qs;
-
-            String as = answers[index];
-            answers[index] = answers[i];
-            answers[i] = as;
-
-            String[] os = options[index];
-            options[index] = options[i];
-            options[i] = os;
+        questionArray = new Question[allQuestions[0].length * allQuestions.length];
+        int count = 0;
+        for(int i = 0; i < allQuestions.length; i++){
+            for(int j = 0; j < allQuestions[i].length; j++){
+                Question q = new Question(allQuestions[i][j], allAnswers[i][j], allOptions[i][j]);
+                questionArray[count] = q;
+                Log.d("check question: ", count + ", " + q.getQuestion());
+                count++;
+            }
         }
     }
 
@@ -208,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
             LinearLayout checkboxGroup = (LinearLayout) dialog.findViewById(R.id.checkbox_group);
 
-            topics = getResources().getStringArray(R.array.question_topics);
+            /*topics = getResources().getStringArray(R.array.question_topics);
             for(String s:topics){
                 CheckBox cbTopic = new CheckBox(getApplicationContext());
                 cbTopic.setPadding(40, 10, 20, 10);
@@ -221,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 checkboxGroup.addView(cbTopic);
-            }
+            }*/
 
             Button dialogButton = (Button) dialog.findViewById(R.id.dialog_button_ok);
             // if button is clicked, close the custom dialog
@@ -265,9 +263,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void compareAnswers(View v){
         playerScore = 0;
-        for(int i = 0; i < submissions.length; i++){
-
-            if(submissions[i].equals(answers[i])){
+        for(Question q:questionArray){
+            if(q.checkAnswer()){
                 playerScore++;
             }
         }
@@ -310,16 +307,16 @@ public class MainActivity extends AppCompatActivity {
 
             //Get the submit button and make sure it is hidden until the final question is reached
             Button btn = (Button) rootView.findViewById(R.id.submit_button);
-            if(secNum == questions.length){
+            if(secNum == questionArray.length){
                 btn.setVisibility(View.VISIBLE);
             }
             else{
                 btn.setVisibility(View.GONE);
             }
 
-            //Initialise TextViews for questions and populate them with string resource text
+            //Initialise TextViews for questions and populate them with questions from questionArray
             TextView questionView = (TextView) rootView.findViewById(R.id.question);
-            questionView.setText(questions[secNum - 1]);
+            questionView.setText(questionArray[secNum - 1].getQuestion());
             TextView questionNum = (TextView) rootView.findViewById(R.id.question_header);
             questionNum.setText(getString(R.string.question_header, ""+secNum));
 
@@ -327,24 +324,18 @@ public class MainActivity extends AppCompatActivity {
             final RadioGroup rg = (RadioGroup) rootView.findViewById(R.id.options);
             for(int i = 0; i < rg.getChildCount(); i++){
                 RadioButton rbn = (RadioButton) rg.getChildAt(i);
-                rbn.setText(options[secNum - 1][i]);
+                rbn.setText(questionArray[secNum - 1].getOptions()[i]);
             }
 
             //Set onchecked listener for all radiobuttons
             rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    submissions[secNum - 1] = "heloo";
-                    Log.d("check the id", checkedId+"");
-
                     checkedId = checkedId % 4;
                     if(checkedId == 0){
                         checkedId = checkedId + 4;
                     }
-                    submissions[secNum - 1] = options[secNum - 1][checkedId - 1];
-
-                    Log.d("check the id again", checkedId+"");
-
+                    questionArray[secNum - 1].makeSubmission(questionArray[secNum - 1].getOptions()[checkedId - 1]);
                 }
             });
 
@@ -373,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show total of pages related to the number of questions.
-            return 5;
+            return 10;
         }
 
         @Override

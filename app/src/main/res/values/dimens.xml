@@ -10,7 +10,8 @@
     <dimen name="question_num_text_size">30sp</dimen>
     <dimen name="question_num_padding">12dp</dimen>
 
-    <dimen name="radio_group_padding">25dp</dimen>
+    <dimen name="radio_group_padding_top">25dp</dimen>
+    <dimen name="radio_group_padding_bottom">105dp</dimen>
     <dimen name="radio_button_padding">8dp</dimen>
 
     <dimen name="submit_button_top_padding">30dp</dimen>
