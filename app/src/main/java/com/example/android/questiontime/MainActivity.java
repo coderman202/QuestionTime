@@ -7,27 +7,18 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -63,11 +54,16 @@ public class MainActivity extends AppCompatActivity {
     public CoordinatorLayout mainLayout;
 
     public int playerScore;
+    public static int questionCount = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+
+        mainLayout = (CoordinatorLayout) findViewById(R.id.main_content);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mainLayout = (CoordinatorLayout) findViewById(R.id.main_content);
+
 
         Resources res = getResources();
         TypedArray qa = res.obtainTypedArray(R.array.all_questions);
@@ -146,10 +142,17 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < allQuestions.length; i++){
             for(int j = 0; j < allQuestions[i].length; j++){
                 Question q = new Question(allQuestions[i][j], allAnswers[i][j], allOptions[i][j]);
+                q.setTopic(i);
                 questionArray[count] = q;
-                Log.d("check question: ", count + ", " + q.getQuestion());
                 count++;
             }
+        }
+
+        for (int i = questionArray.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            Question q = questionArray[i];
+            questionArray[i] = questionArray[index];
+            questionArray[index] = q;
         }
     }
 
@@ -197,43 +200,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
 
-        if (id == R.id.topics_options) {
-            // custom dialog
-            final Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.topics_menu);
-            dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels, getResources().getDisplayMetrics().heightPixels/2);
-            dialog.setTitle(R.string.topics_title);
-
-            LinearLayout checkboxGroup = (LinearLayout) dialog.findViewById(R.id.checkbox_group);
-
-            /*topics = getResources().getStringArray(R.array.question_topics);
-            for(String s:topics){
-                CheckBox cbTopic = new CheckBox(getApplicationContext());
-                cbTopic.setPadding(40, 10, 20, 10);
-                cbTopic.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-                cbTopic.setTextSize(16);
-                cbTopic.setText(s);
-                cbTopic.setOnClickListener(new View.OnClickListener(){
-                    public void onClick(View v){
-                        Toast.makeText(getApplicationContext(), "You chose: ", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                checkboxGroup.addView(cbTopic);
-            }*/
-
-            Button dialogButton = (Button) dialog.findViewById(R.id.dialog_button_ok);
-            // if button is clicked, close the custom dialog
-            dialogButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-
-            dialog.show();
-            return true;
-        }
-        else if(id==R.id.profile_options){
+        if(id==R.id.profile_options){
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.profile_menu);
             dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels, getResources().getDisplayMetrics().heightPixels/2);
@@ -260,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    //Compare the answers and show a snackbar message to display the final score
     public void compareAnswers(View v){
         playerScore = 0;
         for(Question q:questionArray){
@@ -268,120 +235,9 @@ public class MainActivity extends AppCompatActivity {
                 playerScore++;
             }
         }
-        Snackbar.make(mainLayout, "You scored: " + playerScore + " out of 5", Snackbar.LENGTH_LONG).show();
+        String message = getString(R.string.result_message, ""+playerScore, ""+questionCount);
+        Snackbar.make(mainLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-            //int to store the section number for selecting the question and answers to put in
-            final int secNum = getArguments().getInt(ARG_SECTION_NUMBER);
-
-            //Get the submit button and make sure it is hidden until the final question is reached
-            Button btn = (Button) rootView.findViewById(R.id.submit_button);
-            if(secNum == questionArray.length){
-                btn.setVisibility(View.VISIBLE);
-            }
-            else{
-                btn.setVisibility(View.GONE);
-            }
-
-            //Initialise TextViews for questions and populate them with questions from questionArray
-            TextView questionView = (TextView) rootView.findViewById(R.id.question);
-            questionView.setText(questionArray[secNum - 1].getQuestion());
-            TextView questionNum = (TextView) rootView.findViewById(R.id.question_header);
-            questionNum.setText(getString(R.string.question_header, ""+secNum));
-
-            //Initialise the RadioButton group of possible answers for each question
-            final RadioGroup rg = (RadioGroup) rootView.findViewById(R.id.options);
-            for(int i = 0; i < rg.getChildCount(); i++){
-                RadioButton rbn = (RadioButton) rg.getChildAt(i);
-                rbn.setText(questionArray[secNum - 1].getOptions()[i]);
-            }
-
-            //Set onchecked listener for all radiobuttons
-            rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    checkedId = checkedId % 4;
-                    if(checkedId == 0){
-                        checkedId = checkedId + 4;
-                    }
-                    questionArray[secNum - 1].makeSubmission(questionArray[secNum - 1].getOptions()[checkedId - 1]);
-                }
-            });
-
-            return rootView;
-        }
-
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show total of pages related to the number of questions.
-            return 10;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-                case 3:
-                    return "SECTION 4";
-                case 4:
-                    return "SECTION 5";
-            }
-            return null;
-        }
-    }
 }

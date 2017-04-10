@@ -7,27 +7,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/questions_fragment"
-    tools:context="com.example.android.questiontime.MainActivity$PlaceholderFragment">
+    tools:context="com.example.android.questiontime.MainFragment">
 
-    <TextView style="@style/QuestionNumberStyle"
-        android:id="@+id/question_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
+    <TextView style="@style/HeaderStyle"
+        android:id="@+id/question_header"/>
 
     <TextView style="@style/QuestionStyle"
         android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question_header"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@id/question_header"/>
 
     <RadioGroup style="@style/RadioGroup"
-        android:id="@+id/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:id="@+id/options">
 
         <RadioButton style="@style/OptionsStyle" />
 
@@ -39,17 +29,10 @@
 
     </RadioGroup>
 
-    <Button
+    <Button style="@style/ButtonStyle"
         android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/submit"
-        android:layout_below="@id/options"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:visibility="gone"
-        android:textColor="@color/submitButtonTextColor"
-        android:background="@color/submitButtonbgColor"
         android:onClick="compareAnswers"/>
 
 </RelativeLayout>

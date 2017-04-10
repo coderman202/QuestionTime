@@ -1,7 +1,8 @@
 package com.example.android.questiontime;
 
 /**
- * Created by Reggie on 09-Apr-17.
+ * A class to represent all questions with their answers, possible answers, topics,
+ * and submitted answers.
  */
 
 class Question {
@@ -47,6 +48,10 @@ class Question {
 
     public void setTopic(Topic initTopic){
         topic = initTopic;
+    }
+
+    public void setTopic(int initTopic){
+        topic.setValue(initTopic);
     }
 
     void makeSubmission(String initSubmission){

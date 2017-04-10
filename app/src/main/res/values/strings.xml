@@ -4,13 +4,37 @@
     <string name="topics_options">Choose Topics</string>
     <string name="topics_title">Topics Selection</string>
 
-    <string name="profile_options">Profile</string>
-    <string name="profile_title">Profile Settings</string>
-    <string name="username">Enter Username</string>
+    <string name="welcome">Welcome to Question Time!</string>
+
+    <string name="results">Your Results:</string>
 
     <string name="question_header">
         Question <xliff:g id="q_number" example="1">%s</xliff:g>:
     </string>
+
+    <string name="instructions">
+        Choose your topics, get 10 questions and try get them all right. Good luck!
+    </string>
+
+    <string name="swipe">Swipe to continue</string>
+
+    <string name="go">Let\s Go!</string>
+    <string name="play">Let\s Play!</string>
+    <string name="close">Close</string>
+
+    <string name="play_again">Play Again</string>
+
+    <string name="profile_options">Profile</string>
+    <string name="profile_title">Enter Your Details</string>
+    <string name="username">Enter Username</string>
+    <string name="email">Enter Email</string>
+
+    <string name="result_message">
+        You scored: <xliff:g id="final_score" example="7">%s</xliff:g> out of
+        <xliff:g id="questions_total" example="10">%s</xliff:g>
+    </string>
+
+
 
     <string name="submit">Finish</string>
 
@@ -443,64 +467,5 @@
         <item>@array/science_options</item>
         <item>@array/music_options</item>
     </string-array>
-
-    <string-array name="questions">
-        <item>What is the capital of Namibia?</item>
-        <item>Who wrote the novel 1984?</item>
-        <item>Who is the current president of Ireland?</item>
-        <item>Which English football team has won the most FA Cup trophies?</item>
-        <item>What is the largest animal in the world?</item>
-    </string-array>
-
-    <string-array name="answers">
-        <item>Windhoek</item>
-        <item>George Orwell</item>
-        <item>Michael D. Higgins</item>
-        <item>Arsenal</item>
-        <item>Blue Whale</item>
-    </string-array>
-
-    <string-array name="answer1_options">
-        <item>Windhoek</item>
-        <item>Namibia City</item>
-        <item>Cairo</item>
-        <item>Addis Ababa</item>
-    </string-array>
-
-    <string-array name="answer2_options">
-        <item>John Steinbeck</item>
-        <item>George Orwell</item>
-        <item>Ernest Hemingway</item>
-        <item>Mark Twain</item>
-    </string-array>
-
-    <string-array name="answer3_options">
-        <item>Mary McAleese</item>
-        <item>David Cameron</item>
-        <item>Mary Robinson</item>
-        <item>Michael D. Higgins</item>
-    </string-array>
-
-    <string-array name="answer4_options">
-        <item>Manchester United</item>
-        <item>Arsenal</item>
-        <item>Liverpool</item>
-        <item>Chelsea</item>
-    </string-array>
-
-    <string-array name="answer5_options">
-        <item>Indian Elephant</item>
-        <item>Blue Whale</item>
-        <item>Hippopotamus</item>
-        <item>Rhinoceros</item>
-    </string-array>
-
-    <array name="options">
-        <item>@array/answer1_options</item>
-        <item>@array/answer2_options</item>
-        <item>@array/answer3_options</item>
-        <item>@array/answer4_options</item>
-        <item>@array/answer5_options</item>
-    </array>
 
 </resources>
