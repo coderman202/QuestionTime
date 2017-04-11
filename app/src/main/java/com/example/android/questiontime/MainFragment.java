@@ -24,12 +24,12 @@ public class MainFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    //Question variable to store to current question for each page
+    //Question variable to store to current question for each page.
+    // Created to make code more concise.
     public static Question q = new Question("");
 
     public MainFragment() {
     }
-
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -49,11 +49,14 @@ public class MainFragment extends Fragment {
 
 
         //int to store the section number for selecting the question and answers to put in
+        //and one to store the index for accessing each question in the ArrayList. Should be
+        //secNum - 3 because the first 3 pages are not questions.
         final int secNum = getArguments().getInt(ARG_SECTION_NUMBER);
+        final int questionNumber = secNum - 3;
 
         //Get the submit button and make sure it is hidden until the final question is reached
         Button btn = (Button) rootView.findViewById(R.id.submit_button);
-        if(secNum == QUESTION_COUNT + 3){
+        if(secNum == QUESTION_COUNT + 2){
             btn.setVisibility(View.VISIBLE);
         }
         else{
@@ -64,15 +67,14 @@ public class MainFragment extends Fragment {
         MainActivity.getFilteredQuestionArray();
         Log.d("Arraylist Length: ", fullQuestionArray.size()+"");
 
-        q = fullQuestionArray.get(secNum -3);
+        q = fullQuestionArray.get(questionNumber);
 
 
         //Initialise TextViews for questions and populate them with questions from questionArray
         TextView questionView = (TextView) rootView.findViewById(R.id.question);
-
         questionView.setText(q.getQuestion());
-        TextView questionNum = (TextView) rootView.findViewById(R.id.question_header);
-        questionNum.setText(getString(R.string.question_header, ""+ (secNum - 3)));
+        final TextView questionNum = (TextView) rootView.findViewById(R.id.question_header);
+        questionNum.setText(getString(R.string.question_header, ""+ (secNum - 2)));
 
         //Initialise the RadioButton group of possible answers for each question
         final RadioGroup rg = (RadioGroup) rootView.findViewById(R.id.options);
@@ -91,7 +93,7 @@ public class MainFragment extends Fragment {
                 if(checkedId == 0){
                     checkedId = checkedId + 4;
                 }
-                fullQuestionArray.get(secNum - 3).setSubmission(fullQuestionArray.get(secNum - 3).getOptions()[checkedId - 1]);
+                fullQuestionArray.get(questionNumber).setSubmission(fullQuestionArray.get(questionNumber).getOptions()[checkedId - 1]);
             }
         });
 

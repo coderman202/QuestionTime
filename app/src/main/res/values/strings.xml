@@ -34,9 +34,8 @@
         <xliff:g id="questions_total" example="10">%s</xliff:g>
     </string>
 
-    <string name="choice">Choice</string>
-    <string name="answer">Answer</string>
-    <string name="result">Result</string>
+    <string name="choice">Your Choice</string>
+    <string name="answer">Correct Answer</string>
 
 
 

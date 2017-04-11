@@ -10,7 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+import static com.example.android.questiontime.MainActivity.chosenTopicList;
 
 /**
  * A fragment containing the topics selection screen.
@@ -22,7 +22,7 @@ public class TopicsChoiceFragment extends Fragment {
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public static ArrayList<Topic> chosenTopicList = new ArrayList<>();
+
 
     public static int counter = 0;
 

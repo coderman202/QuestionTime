@@ -27,21 +27,24 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         else if(position == 1){
             return TopicsChoiceFragment.newInstance(position);
         }
-        else if(position == 12){
+        else if(position == 2){
+            return ProfileScreenFragment.newInstance(position);
+        }
+        else if(position == QUESTION_COUNT + 3){
             return ResultsScreenFragment.newInstance(position);
         }
-        return MainFragment.newInstance(position + 2);
+        return MainFragment.newInstance(position);
     }
 
     @Override
     public int getCount() {
         // Show total of pages related to the number of questions and then the welcome and results screens
-        return QUESTION_COUNT + 3;
+        return QUESTION_COUNT + 4;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if(position < QUESTION_COUNT){
+        if(position < QUESTION_COUNT + 4){
             return "SECTION " + position;
         }
         return null;

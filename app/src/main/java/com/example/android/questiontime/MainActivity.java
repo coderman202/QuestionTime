@@ -2,6 +2,7 @@ package com.example.android.questiontime;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -27,8 +28,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
-import static com.example.android.questiontime.TopicsChoiceFragment.chosenTopicList;
-
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -51,23 +50,35 @@ public class MainActivity extends AppCompatActivity {
             Topic.SPORTS, Topic.GEOGRAPHY,
             Topic.HISTORY, Topic.SCIENCE, Topic.MUSIC};
 
-    //Using an array of custom Question class Questions for combining all
+    //Using an arraylist of custom Question class Questions for combining all
     // questions with their relevant answers and options
-    public static Question[] questionArray;
     public static ArrayList<Question> fullQuestionArray = new ArrayList<>();
-    public static ArrayList<Question> filteredQuestionArray;
 
-    public EditText username;
-    public String user;
+    //Also arraylist of topics for storing all chosen topics
+    public static ArrayList<Topic> chosenTopicList = new ArrayList<>();
+
+    public EditText usernameEditText;
+    public String username;
 
     public CoordinatorLayout mainLayout;
 
-    public int playerScore;
+    public static int playerScore;
     public static final int QUESTION_COUNT = 10;
+
+    //States for recalling scores and questions;
+    static final String STATE_PLAYER_SCORE = "PlayerScore";
+    static final String STATE_QUESTION_ARRAY = "QuestionArray";
+    static final String STATE_CHOSEN_TOPICS = "ChosenTopics";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(savedInstanceState != null){
+            playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
+            fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
+            chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+        }
 
         setContentView(R.layout.activity_main);
 
@@ -215,18 +226,28 @@ public class MainActivity extends AppCompatActivity {
         if(id==R.id.profile_options){
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.profile_menu);
-            dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels, getResources().getDisplayMetrics().heightPixels/2);
+            //Change layout depending on screen orientation.
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+                dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels, getResources().getDisplayMetrics().heightPixels/2);
+            }
+            else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels/2, getResources().getDisplayMetrics().heightPixels);
+            }
+            else{
+                dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels/2, getResources().getDisplayMetrics().heightPixels/2);
+            }
+
             dialog.setTitle(R.string.profile_title);
 
-            username = (EditText) dialog.findViewById(R.id.username);
-            username.setOnKeyListener(new View.OnKeyListener() {
+            usernameEditText = (EditText) dialog.findViewById(R.id.username);
+            usernameEditText.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     // If the event is a key-down event on the "enter" button
                     if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                             (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        user = username.getText().toString();
-                        Toast.makeText(getApplicationContext(), user, Toast.LENGTH_SHORT).show();
+                        username = usernameEditText.getText().toString();
+                        Toast.makeText(getApplicationContext(), username, Toast.LENGTH_SHORT).show();
                         return true;
                     }
                     return false;
@@ -242,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
     //Compare the answers and show a snackbar message to display the final score
     public void compareAnswers(View v){
         playerScore = 0;
-        for (int i = 0; i < QUESTION_COUNT - 1; i++) {
+        for (int i = 0; i < QUESTION_COUNT; i++) {
             if(fullQuestionArray.get(i).checkAnswer()) {
                 playerScore++;
             }

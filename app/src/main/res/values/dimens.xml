@@ -8,6 +8,7 @@
     <dimen name="header_text_size">28sp</dimen>
     <dimen name="question_text_size">24sp</dimen>
     <dimen name="answer_text_size">20sp</dimen>
+    <dimen name="table_header_text_size">18sp</dimen>
     <dimen name="table_row_text_size">14sp</dimen>
 
 

@@ -34,7 +34,8 @@
     <TextView style="@style/TableHeaders"
         android:id="@+id/result_score"
         android:layout_below="@id/results_scrollview"
-        android:padding="@dimen/header_padding"/>
+        android:padding="@dimen/header_padding"
+        android:layout_centerInParent="true"/>
 
     <Button style="@style/ButtonStyle"
         android:text="@string/play_again" />

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import static com.example.android.questiontime.MainActivity.QUESTION_COUNT;
 import static com.example.android.questiontime.MainActivity.fullQuestionArray;
+import static com.example.android.questiontime.MainActivity.playerScore;
 
 /**
  * A fragment containing the welcome screen.
@@ -44,12 +45,13 @@ public class ResultsScreenFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.results_screen, container, false);
 
-        //int to store the section number for selecting the question and answers to put in
-        final int secNum = getArguments().getInt(ARG_SECTION_NUMBER);
-
         TableLayout resultsTable = (TableLayout) rootView.findViewById(R.id.results_table);
-
-        for (int i = 0; i < QUESTION_COUNT - 1; i++) {
+        /**
+         * Add rows to the results table, 1 for each question answered.
+         * Get the correct styles for the rows and change the colour of the choice textview to
+         * represent whether you were right or wrong
+         */
+        for (int i = 0; i < QUESTION_COUNT; i++) {
             TableRow row = new TableRow(getContext());
 
             TextView answer = new TextView(new ContextThemeWrapper(getContext(), R.style.TableRows));
@@ -64,11 +66,10 @@ public class ResultsScreenFragment extends Fragment {
             }
             row.addView(answer, 0);
             row.addView(choice, 1);
-
-
             resultsTable.addView(row);
-
         }
+        TextView score = (TextView) rootView.findViewById(R.id.result_score);
+        score.setText(getString(R.string.result_message, playerScore+"", QUESTION_COUNT+""));
 
         return rootView;
     }

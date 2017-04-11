@@ -17,6 +17,16 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="ParentLayout">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingBottom">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingRight">@dimen/activity_vertical_margin</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
     <style name="HeaderStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -28,9 +38,16 @@
     </style>
 
     <style name="QuestionStyle">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:textSize">@dimen/question_text_size</item>
+    <item name="android:gravity">center</item>
+    </style>
+
+    <style name="QuestionStyleLandscape" parent="QuestionStyle">
+        <item name="android:layout_centerHorizontal">false</item>
+        <item name="android:layout_alignParentLeft">true</item>
         <item name="android:textSize">@dimen/question_text_size</item>
         <item name="android:gravity">center</item>
     </style>
@@ -53,9 +70,17 @@
         <item name="android:paddingLeft">@dimen/radio_group_padding_left</item>
     </style>
 
+    <style name="RadioGroupLandscape" parent="RadioGroup">
+        <item name="android:layout_centerVertical">false</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:paddingTop">@dimen/radio_group_padding_top</item>
+        <item name="android:paddingBottom">@dimen/radio_group_padding_bottom</item>
+        <item name="android:paddingLeft">@dimen/radio_group_padding_left</item>
+    </style>
+
     <style name="OptionsStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:textSize">@dimen/answer_text_size</item>
-        <item name="android:paddingBottom">@dimen/radio_button_padding</item>
+        <item name="android:padding">@dimen/radio_button_padding</item>
     </style>
 
     <style name="CheckBoxGroup">
@@ -69,10 +94,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
         <item name="android:background">@color/submitButtonbgColor</item>
         <item name="android:textColor">@color/submitButtonTextColor</item>
-        <item name="android:layout_marginRight">@dimen/button_margins</item>
-        <item name="android:layout_marginBottom">@dimen/button_margins</item>
+        <item name="android:layout_margin">@dimen/button_margins</item>
     </style>
 
     <style name="ResultsScrollViewStyle">
@@ -98,7 +123,7 @@
     </style>
     <style name="TableHeaders" parent="TableRows">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/question_text_size</item>
+        <item name="android:textSize">@dimen/table_header_text_size</item>
     </style>
 
 
