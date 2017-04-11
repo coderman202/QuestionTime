@@ -40,6 +40,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_alignParentRight">true</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
@@ -88,5 +89,18 @@
         <item name="android:paddingTop">@dimen/edit_text_padding_top</item>
         <item name="android:textSize">@dimen/edit_text_size</item>
     </style>
+
+    <style name="TableRows">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/table_row_text_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="TableHeaders" parent="TableRows">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/question_text_size</item>
+    </style>
+
+
 
 </resources>

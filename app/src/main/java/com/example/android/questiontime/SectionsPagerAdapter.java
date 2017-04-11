@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import static com.example.android.questiontime.MainActivity.questionCount;
+import static com.example.android.questiontime.MainActivity.QUESTION_COUNT;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -36,12 +36,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show total of pages related to the number of questions and then the welcome and results screens
-        return questionCount + 3;
+        return QUESTION_COUNT + 3;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if(position < questionCount){
+        if(position < QUESTION_COUNT){
             return "SECTION " + position;
         }
         return null;

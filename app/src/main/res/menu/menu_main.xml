@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.questiontime.MainActivity">
     <item
-        android:id="@+id/topics_options"
-        android:orderInCategory="1"
-        android:title="@string/topics_options"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/profile_options"
         android:orderInCategory="2"
         android:title="@string/profile_options"

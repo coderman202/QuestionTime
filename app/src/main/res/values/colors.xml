@@ -6,4 +6,7 @@
 
     <color name="submitButtonbgColor">#303F9F</color>
     <color name="submitButtonTextColor">#FFFFFF</color>
+
+    <color name="correctAnswer">@android:color/holo_green_light</color>
+    <color name="wrongAnswer">@android:color/holo_red_light</color>
 </resources>

@@ -1,5 +1,8 @@
 package com.example.android.questiontime;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * A class to represent all questions with their answers, possible answers, topics,
  * and submitted answers.
@@ -14,16 +17,50 @@ class Question {
     public Question(String initQuestion, String initAnswer, String[] initOptions, Topic initTopic){
         question = initQuestion;
         answer = initAnswer;
-        options = initOptions;
+        setOptions(initOptions);
         topic = initTopic;
+        submission = "";
     }
 
-    //Second constructor sets topic to General Knowledge if no topic has been given
+    //Second constructor sets topic to General Knowledge if no topic has been specified
     Question(String initQuestion, String initAnswer, String[] initOptions){
         question = initQuestion;
         answer = initAnswer;
-        options = initOptions;
+        setOptions(initOptions);
         topic = Topic.GENERAL_KNOWLEDGE;
+        submission = "";
+    }
+
+    Question(String initQuestion){
+        question = initQuestion;
+    }
+
+    void setAnswer(String initAnswer){
+        answer = initAnswer;
+    }
+
+    void setTopic(Topic initTopic){
+        topic = initTopic;
+    }
+
+    void setTopic(int initTopic){
+        topic.setValue(initTopic);
+    }
+
+    //When setting options, shuffle them up randomly first
+    void setOptions(String[] initOptions){
+        Random rnd = new Random();
+        for (int i = initOptions.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            String temp = initOptions[index];
+            initOptions[index] = initOptions[i];
+            initOptions[i] = temp;
+        }
+        options = initOptions;
+    }
+
+    void setSubmission(String initSubmission){
+        submission = initSubmission;
     }
 
     String getQuestion() {
@@ -46,16 +83,13 @@ class Question {
         return options;
     }
 
-    public void setTopic(Topic initTopic){
-        topic = initTopic;
-    }
-
-    public void setTopic(int initTopic){
-        topic.setValue(initTopic);
-    }
-
-    void makeSubmission(String initSubmission){
-        submission = initSubmission;
+    boolean hasTopic(ArrayList<Topic> topicArray){
+        for (Topic t:topicArray) {
+            if(t.equals(topic)){
+                return true;
+            }
+        }
+        return false;
     }
 
     boolean checkAnswer(){

@@ -2,6 +2,7 @@ package com.example.android.questiontime;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import static com.example.android.questiontime.MainActivity.QUESTION_COUNT;
+import static com.example.android.questiontime.MainActivity.fullQuestionArray;
 
 /**
  * A fragment containing the questions.
@@ -19,6 +23,9 @@ public class MainFragment extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+
+    //Question variable to store to current question for each page
+    public static Question q = new Question("");
 
     public MainFragment() {
     }
@@ -46,16 +53,24 @@ public class MainFragment extends Fragment {
 
         //Get the submit button and make sure it is hidden until the final question is reached
         Button btn = (Button) rootView.findViewById(R.id.submit_button);
-        if(secNum == 13){
+        if(secNum == QUESTION_COUNT + 3){
             btn.setVisibility(View.VISIBLE);
         }
         else{
             btn.setVisibility(View.GONE);
         }
 
+        Log.d("Arraylist Length: ", fullQuestionArray.size()+"");
+        MainActivity.getFilteredQuestionArray();
+        Log.d("Arraylist Length: ", fullQuestionArray.size()+"");
+
+        q = fullQuestionArray.get(secNum -3);
+
+
         //Initialise TextViews for questions and populate them with questions from questionArray
         TextView questionView = (TextView) rootView.findViewById(R.id.question);
-        questionView.setText(MainActivity.questionArray[secNum - 3].getQuestion());
+
+        questionView.setText(q.getQuestion());
         TextView questionNum = (TextView) rootView.findViewById(R.id.question_header);
         questionNum.setText(getString(R.string.question_header, ""+ (secNum - 3)));
 
@@ -63,7 +78,7 @@ public class MainFragment extends Fragment {
         final RadioGroup rg = (RadioGroup) rootView.findViewById(R.id.options);
         for(int i = 0; i < rg.getChildCount(); i++){
             RadioButton rbn = (RadioButton) rg.getChildAt(i);
-            rbn.setText(MainActivity.questionArray[secNum - 3].getOptions()[i]);
+            rbn.setText(q.getOptions()[i]);
 
 
         }
@@ -76,7 +91,7 @@ public class MainFragment extends Fragment {
                 if(checkedId == 0){
                     checkedId = checkedId + 4;
                 }
-                MainActivity.questionArray[secNum - 2].makeSubmission(MainActivity.questionArray[secNum - 3].getOptions()[checkedId - 1]);
+                fullQuestionArray.get(secNum - 3).setSubmission(fullQuestionArray.get(secNum - 3).getOptions()[checkedId - 1]);
             }
         });
 

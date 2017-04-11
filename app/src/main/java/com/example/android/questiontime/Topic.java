@@ -39,6 +39,31 @@ enum Topic {
         return null;
     }
 
+    public String getStringValue(){
+        switch (value){
+            case 0:
+                return "Sports";
+            case 1:
+                return "Geography";
+            case 2:
+                return "History";
+            case 3:
+                return "Science";
+            case 4:
+                return "Music";
+            case 5:
+                return "Arts";
+            case 6:
+                return "General Knowledge";
+            case 7:
+                return "Animals";
+            case 8:
+                return "Food & Drink";
+
+        }
+        return null;
+    }
+
     public int getValue() {
         return value;
     }

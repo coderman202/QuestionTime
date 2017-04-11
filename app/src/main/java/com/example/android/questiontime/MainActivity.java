@@ -21,7 +21,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
+
+import static com.example.android.questiontime.TopicsChoiceFragment.chosenTopicList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,13 +46,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    //String Arrays for storing all questions, answers and options
-    public static String[][] allQuestions, allAnswers;
-    public static String[][][] allOptions;
+
+    public static Topic[] allTopics = {
+            Topic.SPORTS, Topic.GEOGRAPHY,
+            Topic.HISTORY, Topic.SCIENCE, Topic.MUSIC};
 
     //Using an array of custom Question class Questions for combining all
     // questions with their relevant answers and options
     public static Question[] questionArray;
+    public static ArrayList<Question> fullQuestionArray = new ArrayList<>();
+    public static ArrayList<Question> filteredQuestionArray;
 
     public EditText username;
     public String user;
@@ -54,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public CoordinatorLayout mainLayout;
 
     public int playerScore;
-    public static int questionCount = 10;
+    public static final int QUESTION_COUNT = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,28 +89,22 @@ public class MainActivity extends AppCompatActivity {
 
         Resources res = getResources();
         TypedArray qa = res.obtainTypedArray(R.array.all_questions);
+        TypedArray aa = res.obtainTypedArray(R.array.all_answers);
+        TypedArray oa = res.obtainTypedArray(R.array.all_options);
         int n = qa.length();
-        allQuestions = new String[n][];
+        Log.d("length of n", n+"");
+
+        //String Arrays for getting all questions, answers and options
+        // before moving them into question ArrayList
+        String [][] allQuestions = new String[n][];
+        String [][] allAnswers = new String[n][];
+        String [][][] allOptions = new String[n][10][];
         for (int i = 0; i < n; ++i) {
             int id = qa.getResourceId(i, 0);
             allQuestions[i] = res.getStringArray(id);
-        }
-        qa.recycle();
-
-        TypedArray aa = res.obtainTypedArray(R.array.all_answers);
-        n = aa.length();
-        allAnswers = new String[n][];
-        for (int i = 0; i < n; ++i) {
-            int id = aa.getResourceId(i, 0);
+            id = aa.getResourceId(i, 0);
             allAnswers[i] = res.getStringArray(id);
-        }
-        aa.recycle();
-
-        TypedArray oa = res.obtainTypedArray(R.array.all_options);
-        n = oa.length();
-        allOptions = new String[n][10][];
-        for (int i = 0; i < n; ++i) {
-            int id = oa.getResourceId(i, 0);
+            id = oa.getResourceId(i, 0);
             TypedArray oaInner = res.obtainTypedArray(id);
             int m = oaInner.length();
             for(int j = 0; j < m; j++){
@@ -109,50 +112,59 @@ public class MainActivity extends AppCompatActivity {
                 allOptions[i][j] = res.getStringArray(id);
             }
             oaInner.recycle();
-        }
-        oa.recycle();
-
-        Random rnd = new Random();
-        for(int j = 0; j < allQuestions.length; j++){
-            for(int i = allQuestions[j].length - 1; i > 0; i--){
-                int index = rnd.nextInt(i + 1);
-                String qs = allQuestions[j][index];
-                allQuestions[j][index] = allQuestions[j][i];
-                allQuestions[j][i] = qs;
-
-                String as = allAnswers[j][index];
-                allAnswers[j][index] = allAnswers[j][i];
-                allAnswers[j][i] = as;
-
-                String[] os = allOptions[j][index];
-                allOptions[j][index] = allOptions[j][i];
-                allOptions[j][i] = os;
-
-                for(int k = 0; k < allOptions[j][i].length; k++){
-                    int ind = rnd.nextInt(k + 1);
-                    String opt = allOptions[j][i][ind];
-                    allOptions[j][i][ind] = allOptions[j][i][k];
-                    allOptions[j][i][k] = opt;
-                }
+            Log.d("Check length: ", allQuestions[0].length + "");
+            for (int j = 0; j < allQuestions[0].length; j++) {
+                Question q = new Question(allQuestions[i][j], allAnswers[i][j], allOptions[i][j]);
+                fullQuestionArray.add(q);
+                Log.d("Question is: ", q.getQuestion());
             }
         }
+        qa.recycle();
+        aa.recycle();
+        oa.recycle();
+        Log.d("Arraylist pre shuffle: ", allQuestions.length * allQuestions[0].length+"");
+        Log.d("Arraylist pre shuffle: ", fullQuestionArray.size()+"");
 
-        questionArray = new Question[allQuestions[0].length * allQuestions.length];
         int count = 0;
-        for(int i = 0; i < allQuestions.length; i++){
-            for(int j = 0; j < allQuestions[i].length; j++){
-                Question q = new Question(allQuestions[i][j], allAnswers[i][j], allOptions[i][j]);
-                q.setTopic(i);
-                questionArray[count] = q;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < allQuestions[0].length; j++) {
+                Log.d("Count val: ", count+"");
+                fullQuestionArray.get(count).setTopic(allTopics[i]);
                 count++;
             }
         }
 
-        for (int i = questionArray.length - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
-            Question q = questionArray[i];
-            questionArray[i] = questionArray[index];
-            questionArray[index] = q;
+        //A shuffle method for randomly shuffling the questions
+        long seed = System.nanoTime();
+
+        Collections.shuffle(fullQuestionArray, new Random(seed));
+
+        Log.d("Arraylist post shuffl: ", fullQuestionArray.size()+"");
+    }
+
+    public void getQuestions(View v){
+        getFilteredQuestionArray();
+    }
+
+
+    //Loops through original question array to check for questions selected by chosen
+    // topics and add them to the filtered question list. If no topics are chosen, add all topics.
+    public static void getFilteredQuestionArray(){
+        if(chosenTopicList.isEmpty()){
+            chosenTopicList.addAll(Arrays.asList(allTopics));
+        }
+        for (Topic t:chosenTopicList) {
+            Log.d("Topic: ", ""+t);
+
+        }
+
+        Iterator<Question> i = fullQuestionArray.iterator();
+        while (i.hasNext()){
+            Question q = i.next();
+            Log.d("Check value: ", ""+q.hasTopic(chosenTopicList));
+            if(!q.hasTopic(chosenTopicList)){
+                i.remove();
+            }
         }
     }
 
@@ -230,12 +242,13 @@ public class MainActivity extends AppCompatActivity {
     //Compare the answers and show a snackbar message to display the final score
     public void compareAnswers(View v){
         playerScore = 0;
-        for(Question q:questionArray){
-            if(q.checkAnswer()){
+        for (int i = 0; i < QUESTION_COUNT - 1; i++) {
+            if(fullQuestionArray.get(i).checkAnswer()) {
                 playerScore++;
             }
+
         }
-        String message = getString(R.string.result_message, ""+playerScore, ""+questionCount);
+        String message = getString(R.string.result_message, ""+playerScore, ""+QUESTION_COUNT);
         Snackbar.make(mainLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
