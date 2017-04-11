@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout style="@style/ParentLayout"
+<RelativeLayout style="@style/ParentLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.android.questiontime.TopicsChoiceFragment">
 
     <TextView style="@style/HeaderStyle"
-        android:id="@+id/settings_menu"
+        android:id="@+id/topics_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/topics_title"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topics_header">
 
-        <LinearLayout
+        <TableLayout
             android:id="@+id/checkbox_group"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginStart="@dimen/checkbox_group_margin_left"
-            android:layout_marginLeft="@dimen/checkbox_group_margin_left"
-            android:paddingBottom="@dimen/checkbox_group_padding_bottom">
+            android:stretchColumns="0,1,2"
+            android:gravity="center">
 
 
-        </LinearLayout>
+        </TableLayout>
+
     </ScrollView>
 
-    <Button style="@style/ButtonStyle"
-        android:id="@+id/submit_topic_selection"
-        android:layout_gravity="bottom|end"
-        android:text="@string/play"
-        android:onClick="getQuestions"/>
+    <TextView style="@style/BottomTextViewStyle"
+        android:id="@+id/swipe_message"
+        android:text="@string/swipe" />
 
 
-</LinearLayout>
+</RelativeLayout>

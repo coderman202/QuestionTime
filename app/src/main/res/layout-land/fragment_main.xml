@@ -4,32 +4,46 @@
     android:id="@+id/questions_fragment"
     tools:context="com.example.android.questiontime.MainFragment">
 
-    <TextView style="@style/HeaderStyle"
-        android:id="@+id/question_header"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView style="@style/QuestionStyle"
-        android:id="@+id/question"
-        android:layout_below="@id/question_header"
-        android:layout_toLeftOf="@id/options"
-        android:layout_toStartOf="@id/options"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <RadioGroup style="@style/RadioGroupLandscape"
-        android:id="@+id/options">
+            <TextView style="@style/HeaderStyle"
+                android:id="@+id/question_header"
+                android:layout_toRightOf="@id/question"
+                android:layout_toEndOf="@id/question"/>
 
-        <RadioButton style="@style/OptionsStyle" />
+            <TextView style="@style/QuestionStyle"
+                android:id="@+id/question"
+                android:layout_toLeftOf="@id/options"
+                android:layout_toStartOf="@id/options"
+                android:layout_below="@id/question_header"/>
 
-        <RadioButton style="@style/OptionsStyle" />
+            <Spinner style="@style/OptionsStyle"
+                android:id="@+id/option_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/question"
+                android:layout_toRightOf="@id/question"
+                android:layout_below="@id/question_header"/>
 
-        <RadioButton style="@style/OptionsStyle" />
+            <Button style="@style/ButtonStyle"
+                android:id="@+id/submit_button"
+                android:text="@string/submit"
+                android:visibility="gone"
+                android:onClick="compareAnswers"/>
 
-        <RadioButton style="@style/OptionsStyle" />
 
-    </RadioGroup>
+        </RelativeLayout>
 
-    <Button style="@style/ButtonStyle"
-        android:id="@+id/submit_button"
-        android:text="@string/submit"
-        android:visibility="gone"
-        android:onClick="compareAnswers"/>
+    </ScrollView>
+
+
+
+
 
 </RelativeLayout>

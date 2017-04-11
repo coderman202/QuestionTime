@@ -17,6 +17,7 @@
     </string>
 
     <string name="swipe">Swipe to continue</string>
+    <string name="swipe_for_results">Swipe for results</string>
 
     <string name="go">Let\s Go!</string>
     <string name="play">Let\s Play!</string>
@@ -37,9 +38,7 @@
     <string name="choice">Your Choice</string>
     <string name="answer">Correct Answer</string>
 
-
-
-    <string name="submit">Finish</string>
+    <string name="submit">Get Results</string>
 
     <string-array name="question_topics">
         <item>Sports</item>

@@ -30,4 +30,9 @@
         android:visibility="gone"
         android:onClick="compareAnswers"/>
 
+    <TextView style="@style/BottomTextViewStyle"
+        android:id="@+id/swipe_results"
+        android:text="@string/swipe_for_results"
+        android:visibility="gone"/>
+
 </RelativeLayout>

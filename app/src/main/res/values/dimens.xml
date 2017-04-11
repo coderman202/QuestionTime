@@ -5,31 +5,30 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
+    <!-- Text sizes. -->
     <dimen name="header_text_size">28sp</dimen>
     <dimen name="question_text_size">24sp</dimen>
     <dimen name="answer_text_size">20sp</dimen>
     <dimen name="table_header_text_size">18sp</dimen>
     <dimen name="table_row_text_size">14sp</dimen>
+    <dimen name="checkbox_text_size">16sp</dimen>
+    <dimen name="edit_text_size">@dimen/question_text_size</dimen>
 
-
+    <!-- Padding & Margins. -->
     <dimen name="header_padding">12dp</dimen>
-
     <dimen name="intro_padding">20dp</dimen>
-
     <dimen name="radio_group_padding_top">25dp</dimen>
     <dimen name="radio_group_padding_bottom">105dp</dimen>
     <dimen name="radio_group_padding_left">30dp</dimen>
     <dimen name="radio_button_padding">8dp</dimen>
-
     <dimen name="checkbox_group_margin_left">55dp</dimen>
     <dimen name="checkbox_group_padding_bottom">20dp</dimen>
-
+    <dimen name="checkbox_padding_top">10dp</dimen>
+    <dimen name="checkbox_padding_right">20dp</dimen>
+    <dimen name="checkbox_padding_bottom">10dp</dimen>
     <dimen name="submit_button_top_padding">30dp</dimen>
     <dimen name="button_margins">20dp</dimen>
-
     <dimen name="edit_text_padding_bottom">35dp</dimen>
     <dimen name="edit_text_padding_top">16dp</dimen>
     <dimen name="edit_text_margin_left">16dp</dimen>
-
-    <dimen name="edit_text_size">@dimen/question_text_size</dimen>
 </resources>

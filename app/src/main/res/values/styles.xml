@@ -88,6 +88,13 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+    
+    <style name="CheckBoxStyle">
+        <item name="android:textSize">@dimen/checkbox_text_size</item>
+        <item name="android:paddingTop">@dimen/checkbox_padding_top</item>
+        <item name="android:paddingRight">@dimen/checkbox_padding_right</item>
+        <item name="android:paddingBottom">@dimen/checkbox_padding_bottom</item>
+    </style>
 
     <style name="ButtonStyle">
         <item name="android:layout_width">wrap_content</item>
@@ -104,6 +111,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_centerInParent">true</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="EditTextStyle">

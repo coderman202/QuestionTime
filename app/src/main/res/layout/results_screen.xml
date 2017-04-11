@@ -12,31 +12,37 @@
         android:id="@+id/results_scrollview"
         android:layout_below="@id/results_title">
 
-        <TableLayout
-            android:id="@+id/results_table"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="0,1"
-            android:gravity="center">
+            android:orientation="vertical">
 
-             <TableRow>
-                 <TextView style="@style/TableHeaders"
-                     android:text="@string/answer"
-                     android:layout_column="0" />
-                 <TextView style="@style/TableHeaders"
-                     android:text="@string/choice"
-                     android:layout_column="1" />
+            <TableLayout
+                android:id="@+id/results_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="0,1"
+                android:gravity="center">
 
-             </TableRow>
-        </TableLayout>
+                <TableRow>
+                    <TextView style="@style/TableHeaders"
+                        android:text="@string/answer"
+                        android:layout_column="0" />
+                    <TextView style="@style/TableHeaders"
+                        android:text="@string/choice"
+                        android:layout_column="1" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView style="@style/TableHeaders"
+                android:id="@+id/result_score"
+                android:layout_below="@id/results_scrollview"
+                android:padding="@dimen/header_padding"/>
+        </LinearLayout>
     </ScrollView>
 
-    <TextView style="@style/TableHeaders"
-        android:id="@+id/result_score"
-        android:layout_below="@id/results_scrollview"
-        android:padding="@dimen/header_padding"/>
-
     <Button style="@style/ButtonStyle"
-        android:text="@string/play_again" />
+        android:text="@string/play_again"
+        android:onClick="restartGame"/>
 
 </RelativeLayout>

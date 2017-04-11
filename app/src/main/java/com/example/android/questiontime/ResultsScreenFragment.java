@@ -12,6 +12,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import static com.example.android.questiontime.MainActivity.QUESTION_COUNT;
+import static com.example.android.questiontime.MainActivity.STATE_CHOSEN_TOPICS;
+import static com.example.android.questiontime.MainActivity.STATE_PLAYER_SCORE;
+import static com.example.android.questiontime.MainActivity.STATE_QUESTION_ARRAY;
+import static com.example.android.questiontime.MainActivity.chosenTopicList;
 import static com.example.android.questiontime.MainActivity.fullQuestionArray;
 import static com.example.android.questiontime.MainActivity.playerScore;
 
@@ -43,6 +47,12 @@ public class ResultsScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if(savedInstanceState != null){
+            playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
+            fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
+            chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+        }
         final View rootView = inflater.inflate(R.layout.results_screen, container, false);
 
         TableLayout resultsTable = (TableLayout) rootView.findViewById(R.id.results_table);
@@ -69,9 +79,27 @@ public class ResultsScreenFragment extends Fragment {
             resultsTable.addView(row);
         }
         TextView score = (TextView) rootView.findViewById(R.id.result_score);
+        MainActivity.compareAnswers();
         score.setText(getString(R.string.result_message, playerScore+"", QUESTION_COUNT+""));
 
         return rootView;
+    }
+    @Override
+    public void onSaveInstanceState(Bundle saveState){
+        saveState.putInt(STATE_PLAYER_SCORE, playerScore);
+        saveState.putParcelableArrayList(STATE_QUESTION_ARRAY, fullQuestionArray);
+        saveState.putParcelableArrayList(STATE_CHOSEN_TOPICS, chosenTopicList);
+        super.onSaveInstanceState(saveState);
+    }
+    //Restore instance here
+    @Override
+    public void onViewStateRestored(Bundle restoreState) {
+        super.onViewStateRestored(restoreState);
+        if(restoreState!=null){
+            playerScore = restoreState.getInt(STATE_PLAYER_SCORE);
+            fullQuestionArray = restoreState.getParcelableArrayList(STATE_QUESTION_ARRAY);
+            chosenTopicList = restoreState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+        }
     }
 
 }

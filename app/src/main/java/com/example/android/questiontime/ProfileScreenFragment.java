@@ -6,6 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import static com.example.android.questiontime.MainActivity.STATE_CHOSEN_TOPICS;
+import static com.example.android.questiontime.MainActivity.STATE_PLAYER_SCORE;
+import static com.example.android.questiontime.MainActivity.STATE_QUESTION_ARRAY;
+import static com.example.android.questiontime.MainActivity.chosenTopicList;
+import static com.example.android.questiontime.MainActivity.fullQuestionArray;
+import static com.example.android.questiontime.MainActivity.playerScore;
+
 /**
  * A fragment containing the profile screen where users can enter their name and email address.
  */
@@ -17,11 +24,6 @@ public class ProfileScreenFragment extends Fragment {
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
-
-
-
-    public static int counter = 0;
-
 
     public ProfileScreenFragment() {
     }
@@ -41,9 +43,31 @@ public class ProfileScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
+            fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
+            chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+        }
         final View rootView = inflater.inflate(R.layout.profile_screen, container, false);
 
 
         return rootView;
+    }
+    @Override
+    public void onSaveInstanceState(Bundle saveState){
+        saveState.putInt(STATE_PLAYER_SCORE, playerScore);
+        saveState.putParcelableArrayList(STATE_QUESTION_ARRAY, fullQuestionArray);
+        saveState.putParcelableArrayList(STATE_CHOSEN_TOPICS, chosenTopicList);
+        super.onSaveInstanceState(saveState);
+    }
+    //Restore instance here
+    @Override
+    public void onViewStateRestored(Bundle restoreState) {
+        super.onViewStateRestored(restoreState);
+        if(restoreState!=null){
+            playerScore = restoreState.getInt(STATE_PLAYER_SCORE);
+            fullQuestionArray = restoreState.getParcelableArrayList(STATE_QUESTION_ARRAY);
+            chosenTopicList = restoreState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+        }
     }
 }

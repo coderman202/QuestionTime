@@ -31,6 +31,5 @@
 
     <TextView style="@style/BottomTextViewStyle"
         android:id="@+id/swipe_message"
-        android:text="@string/swipe"
-        android:layout_below="@id/edit_texts" />
+        android:text="@string/swipe"/>
 </RelativeLayout>

@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -66,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
     public static final int QUESTION_COUNT = 10;
 
     //States for recalling scores and questions;
-    static final String STATE_PLAYER_SCORE = "PlayerScore";
-    static final String STATE_QUESTION_ARRAY = "QuestionArray";
-    static final String STATE_CHOSEN_TOPICS = "ChosenTopics";
+    public static final String STATE_PLAYER_SCORE = "PlayerScore";
+    public static final String STATE_QUESTION_ARRAY = "QuestionArray";
+    public static final String STATE_CHOSEN_TOPICS = "ChosenTopics";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +152,28 @@ public class MainActivity extends AppCompatActivity {
         Collections.shuffle(fullQuestionArray, new Random(seed));
 
         Log.d("Arraylist post shuffl: ", fullQuestionArray.size()+"");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle saveState){
+        saveState.putInt(STATE_PLAYER_SCORE, playerScore);
+        saveState.putParcelableArrayList(STATE_QUESTION_ARRAY, fullQuestionArray);
+        saveState.putParcelableArrayList(STATE_CHOSEN_TOPICS, chosenTopicList);
+        super.onSaveInstanceState(saveState);
+    }
+    //Restore instance here
+    @Override
+    public void onRestoreInstanceState(Bundle restoreState) {
+        super.onRestoreInstanceState(restoreState);
+        playerScore = restoreState.getInt(STATE_PLAYER_SCORE);
+        fullQuestionArray = restoreState.getParcelableArrayList(STATE_QUESTION_ARRAY);
+        chosenTopicList = restoreState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+    }
+
+    public void restartGame(View view){
+        //mViewPager.setCurrentItem(0, true);
+        finish();
+        startActivity(getIntent());
     }
 
     public void getQuestions(View v){
@@ -271,6 +294,16 @@ public class MainActivity extends AppCompatActivity {
         }
         String message = getString(R.string.result_message, ""+playerScore, ""+QUESTION_COUNT);
         Snackbar.make(mainLayout, message, Snackbar.LENGTH_LONG).show();
+        TextView tv = (TextView) findViewById(R.id.swipe_results);
+        tv.setVisibility(View.VISIBLE);
+    }
+    public static void compareAnswers(){
+        playerScore = 0;
+        for (int i = 0; i < QUESTION_COUNT; i++) {
+            if(fullQuestionArray.get(i).checkAnswer()) {
+                playerScore++;
+            }
+        }
     }
 
 
