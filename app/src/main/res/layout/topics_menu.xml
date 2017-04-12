@@ -11,9 +11,10 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/topics_title"/>
     <ScrollView
+        android:id="@+id/topics_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topics_header">
+        android:layout_centerInParent="true">
 
         <TableLayout
             android:id="@+id/checkbox_group"
@@ -29,7 +30,8 @@
 
     <TextView style="@style/BottomTextViewStyle"
         android:id="@+id/swipe_message"
-        android:text="@string/swipe" />
+        android:text="@string/swipe"
+        android:layout_below="@id/topics_list"/>
 
 
 </RelativeLayout>

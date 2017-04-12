@@ -41,8 +41,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button style="@style/ButtonStyle"
-        android:text="@string/play_again"
-        android:onClick="restartGame"/>
-
 </RelativeLayout>

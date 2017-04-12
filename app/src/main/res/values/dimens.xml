@@ -7,7 +7,7 @@
 
     <!-- Text sizes. -->
     <dimen name="header_text_size">28sp</dimen>
-    <dimen name="question_text_size">24sp</dimen>
+    <dimen name="question_text_size">20sp</dimen>
     <dimen name="answer_text_size">20sp</dimen>
     <dimen name="table_header_text_size">18sp</dimen>
     <dimen name="table_row_text_size">14sp</dimen>
@@ -20,6 +20,7 @@
     <dimen name="radio_group_padding_top">25dp</dimen>
     <dimen name="radio_group_padding_bottom">105dp</dimen>
     <dimen name="radio_group_padding_left">30dp</dimen>
+    <dimen name="radio_group_padding_right">25dp</dimen>
     <dimen name="radio_button_padding">8dp</dimen>
     <dimen name="checkbox_group_margin_left">55dp</dimen>
     <dimen name="checkbox_group_padding_bottom">20dp</dimen>
@@ -27,8 +28,13 @@
     <dimen name="checkbox_padding_right">20dp</dimen>
     <dimen name="checkbox_padding_bottom">10dp</dimen>
     <dimen name="submit_button_top_padding">30dp</dimen>
-    <dimen name="button_margins">20dp</dimen>
+    <dimen name="button_margins">16dp</dimen>
     <dimen name="edit_text_padding_bottom">35dp</dimen>
     <dimen name="edit_text_padding_top">16dp</dimen>
     <dimen name="edit_text_margin_left">16dp</dimen>
+    <dimen name="bottom_textview_margin">16dp</dimen>
+    <dimen name="question_text_padding">10dp</dimen>
+
+    <!--fab sizes-->
+    <dimen name="fab_size">70dp</dimen>
 </resources>

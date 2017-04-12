@@ -48,16 +48,17 @@ public class TopicsChoiceFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final View rootView = inflater.inflate(R.layout.topics_menu, container, false);
         if(savedInstanceState != null){
             playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
             fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
             chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
         }
-
-        final View rootView = inflater.inflate(R.layout.topics_menu, container, false);
 
         String[] topics = getResources().getStringArray(R.array.question_topics);
         CheckBox[] checkBoxGroup = new CheckBox[topics.length];

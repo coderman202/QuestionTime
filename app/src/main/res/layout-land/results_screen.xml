@@ -37,7 +37,4 @@
         android:padding="@dimen/header_padding"
         android:layout_centerInParent="true"/>
 
-    <Button style="@style/ButtonStyle"
-        android:text="@string/play_again" />
-
 </RelativeLayout>

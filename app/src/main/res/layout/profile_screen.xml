@@ -13,23 +13,22 @@
         android:id="@+id/edit_texts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_header"
+        android:layout_centerInParent="true"
         android:orientation="vertical">
 
         <EditText style="@style/EditTextStyle"
             android:id="@+id/username"
             android:inputType="text"
-            android:imeOptions="actionDone"
             android:hint="@string/username"/>
 
         <EditText style="@style/EditTextStyle"
             android:id="@+id/email"
             android:inputType="textEmailAddress"
-            android:imeOptions="actionDone"
             android:hint="@string/email"/>
     </LinearLayout>
 
     <TextView style="@style/BottomTextViewStyle"
         android:id="@+id/swipe_message"
-        android:text="@string/swipe" />
+        android:text="@string/swipe"
+        android:layout_below="@id/edit_texts"/>
 </RelativeLayout>

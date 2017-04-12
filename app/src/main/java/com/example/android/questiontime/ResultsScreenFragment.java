@@ -16,8 +16,10 @@ import static com.example.android.questiontime.MainActivity.STATE_CHOSEN_TOPICS;
 import static com.example.android.questiontime.MainActivity.STATE_PLAYER_SCORE;
 import static com.example.android.questiontime.MainActivity.STATE_QUESTION_ARRAY;
 import static com.example.android.questiontime.MainActivity.chosenTopicList;
+import static com.example.android.questiontime.MainActivity.fabRestart;
 import static com.example.android.questiontime.MainActivity.fullQuestionArray;
 import static com.example.android.questiontime.MainActivity.playerScore;
+import static com.example.android.questiontime.MainActivity.user;
 
 /**
  * A fragment containing the welcome screen.
@@ -48,12 +50,15 @@ public class ResultsScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        final View rootView = inflater.inflate(R.layout.results_screen, container, false);
         if(savedInstanceState != null){
             playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
             fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
             chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
         }
-        final View rootView = inflater.inflate(R.layout.results_screen, container, false);
+
+
+
 
         TableLayout resultsTable = (TableLayout) rootView.findViewById(R.id.results_table);
         /**
@@ -80,10 +85,12 @@ public class ResultsScreenFragment extends Fragment {
         }
         TextView score = (TextView) rootView.findViewById(R.id.result_score);
         MainActivity.compareAnswers();
-        score.setText(getString(R.string.result_message, playerScore+"", QUESTION_COUNT+""));
+        score.setText(getString(R.string.result_message, ""+user, playerScore+"", QUESTION_COUNT+""));
+        fabRestart.setVisibility(View.VISIBLE);
 
         return rootView;
     }
+
     @Override
     public void onSaveInstanceState(Bundle saveState){
         saveState.putInt(STATE_PLAYER_SCORE, playerScore);

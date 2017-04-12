@@ -3,8 +3,10 @@ package com.example.android.questiontime;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 
 import static com.example.android.questiontime.MainActivity.QUESTION_COUNT;
+import static com.example.android.questiontime.MainActivity.fabResult;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -21,19 +23,22 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a MainFragment (defined as a static inner class below).
 
+        if(position == QUESTION_COUNT + 3){
+            fabResult.setVisibility(View.VISIBLE);
+        }
         if(position == 0){
-            return WelcomeScreenFragment.newInstance(position);
+            return WelcomeScreenFragment.newInstance(position +1);
         }
         else if(position == 1){
-            return TopicsChoiceFragment.newInstance(position);
+            return ProfileScreenFragment.newInstance(position +1);
         }
         else if(position == 2){
-            return ProfileScreenFragment.newInstance(position);
+            return TopicsChoiceFragment.newInstance(position +1);
         }
         else if(position == QUESTION_COUNT + 3){
-            return ResultsScreenFragment.newInstance(position);
+            return ResultsScreenFragment.newInstance(position +1);
         }
-        return MainFragment.newInstance(position);
+        return MainFragment.newInstance(position +1);
     }
 
     @Override

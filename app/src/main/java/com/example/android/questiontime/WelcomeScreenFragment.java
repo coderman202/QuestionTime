@@ -38,15 +38,18 @@ public class WelcomeScreenFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final View rootView = inflater.inflate(R.layout.welcome_screen, container, false);
         if(savedInstanceState != null){
             playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
             fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
             chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
         }
-        final View rootView = inflater.inflate(R.layout.welcome_screen, container, false);
+
 
         return rootView;
     }

@@ -37,12 +37,18 @@
         <item name="android:padding">@dimen/header_padding</item>
     </style>
 
+    <style name="HeaderStyleLandscape" parent="HeaderStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_centerHorizontal">false</item>
+    </style>
+
     <style name="QuestionStyle">
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_width">wrap_content</item>
-    <item name="android:layout_centerHorizontal">true</item>
-    <item name="android:textSize">@dimen/question_text_size</item>
-    <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/question_text_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/question_text_padding</item>
     </style>
 
     <style name="QuestionStyleLandscape" parent="QuestionStyle">
@@ -59,6 +65,7 @@
         <item name="android:layout_alignParentEnd">true</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_margin">@dimen/bottom_textview_margin</item>
     </style>
 
     <style name="RadioGroup">
@@ -72,15 +79,18 @@
 
     <style name="RadioGroupLandscape" parent="RadioGroup">
         <item name="android:layout_centerVertical">false</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:paddingTop">@dimen/radio_group_padding_top</item>
-        <item name="android:paddingBottom">@dimen/radio_group_padding_bottom</item>
-        <item name="android:paddingLeft">@dimen/radio_group_padding_left</item>
+        <item name="android:paddingRight">@dimen/radio_group_padding_right</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">left</item>
     </style>
 
     <style name="OptionsStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:textSize">@dimen/answer_text_size</item>
-        <item name="android:padding">@dimen/radio_button_padding</item>
+        <item name="android:paddingTop">@dimen/radio_button_padding</item>
+        <item name="android:paddingBottom">@dimen/radio_button_padding</item>
+    </style>
+
+    <style name="OptionsStyleLandscape" parent="OptionsStyle">
     </style>
 
     <style name="CheckBoxGroup">
@@ -121,6 +131,8 @@
         <item name="android:paddingBottom">@dimen/edit_text_padding_bottom</item>
         <item name="android:paddingTop">@dimen/edit_text_padding_top</item>
         <item name="android:textSize">@dimen/edit_text_size</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:imeOptions">actionDone</item>
     </style>
 
     <style name="TableRows">
@@ -133,7 +145,5 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/table_header_text_size</item>
     </style>
-
-
 
 </resources>

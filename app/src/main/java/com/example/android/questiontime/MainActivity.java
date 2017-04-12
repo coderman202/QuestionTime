@@ -1,33 +1,31 @@
 package com.example.android.questiontime;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
+
+import static com.example.android.questiontime.R.id.fab_restart;
+import static com.example.android.questiontime.R.id.fab_result;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,18 +56,23 @@ public class MainActivity extends AppCompatActivity {
     //Also arraylist of topics for storing all chosen topics
     public static ArrayList<Topic> chosenTopicList = new ArrayList<>();
 
-    public EditText usernameEditText;
-    public String username;
-
     public CoordinatorLayout mainLayout;
 
     public static int playerScore;
+
+    public static String user;
+    public static String emailAddress;
     public static final int QUESTION_COUNT = 10;
 
     //States for recalling scores and questions;
     public static final String STATE_PLAYER_SCORE = "PlayerScore";
     public static final String STATE_QUESTION_ARRAY = "QuestionArray";
     public static final String STATE_CHOSEN_TOPICS = "ChosenTopics";
+    public static final String STATE_USER  = "StateUsername";
+    public static final String STATE_EMAIL  = "StateEmail";
+
+    public static FloatingActionButton fabResult, fabRestart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +82,15 @@ public class MainActivity extends AppCompatActivity {
             playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
             fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
             chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+            user = savedInstanceState.getString(STATE_USER);
+            emailAddress = savedInstanceState.getString(STATE_EMAIL);
+
         }
 
         setContentView(R.layout.activity_main);
 
+        fabResult = (FloatingActionButton) findViewById(fab_result);
+        fabRestart = (FloatingActionButton) findViewById(fab_restart);
 
         mainLayout = (CoordinatorLayout) findViewById(R.id.main_content);
 
@@ -159,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
         saveState.putInt(STATE_PLAYER_SCORE, playerScore);
         saveState.putParcelableArrayList(STATE_QUESTION_ARRAY, fullQuestionArray);
         saveState.putParcelableArrayList(STATE_CHOSEN_TOPICS, chosenTopicList);
+        saveState.putString(STATE_USER, user);
+        saveState.putString(STATE_EMAIL, emailAddress);
         super.onSaveInstanceState(saveState);
     }
     //Restore instance here
@@ -168,10 +178,11 @@ public class MainActivity extends AppCompatActivity {
         playerScore = restoreState.getInt(STATE_PLAYER_SCORE);
         fullQuestionArray = restoreState.getParcelableArrayList(STATE_QUESTION_ARRAY);
         chosenTopicList = restoreState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
+        user = restoreState.getString(STATE_USER);
+        emailAddress = restoreState.getString(STATE_EMAIL);
     }
 
     public void restartGame(View view){
-        //mViewPager.setCurrentItem(0, true);
         finish();
         startActivity(getIntent());
     }
@@ -238,51 +249,6 @@ public class MainActivity extends AppCompatActivity {
         return ret;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        if(id==R.id.profile_options){
-            final Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.profile_menu);
-            //Change layout depending on screen orientation.
-            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-                dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels, getResources().getDisplayMetrics().heightPixels/2);
-            }
-            else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-                dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels/2, getResources().getDisplayMetrics().heightPixels);
-            }
-            else{
-                dialog.getWindow().setLayout(getResources().getDisplayMetrics().widthPixels/2, getResources().getDisplayMetrics().heightPixels/2);
-            }
-
-            dialog.setTitle(R.string.profile_title);
-
-            usernameEditText = (EditText) dialog.findViewById(R.id.username);
-            usernameEditText.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    // If the event is a key-down event on the "enter" button
-                    if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
-                            (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        username = usernameEditText.getText().toString();
-                        Toast.makeText(getApplicationContext(), username, Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                    return false;
-                }
-            });
-
-            dialog.show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     //Compare the answers and show a snackbar message to display the final score
     public void compareAnswers(View v){
         playerScore = 0;
@@ -292,10 +258,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-        String message = getString(R.string.result_message, ""+playerScore, ""+QUESTION_COUNT);
+        String message = getString(R.string.result_message, ""+user, ""+playerScore, ""+QUESTION_COUNT);
         Snackbar.make(mainLayout, message, Snackbar.LENGTH_LONG).show();
-        TextView tv = (TextView) findViewById(R.id.swipe_results);
-        tv.setVisibility(View.VISIBLE);
+
     }
     public static void compareAnswers(){
         playerScore = 0;

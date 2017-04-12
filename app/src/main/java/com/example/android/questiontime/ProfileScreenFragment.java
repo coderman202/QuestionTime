@@ -1,17 +1,24 @@
 package com.example.android.questiontime;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import static com.example.android.questiontime.MainActivity.STATE_CHOSEN_TOPICS;
 import static com.example.android.questiontime.MainActivity.STATE_PLAYER_SCORE;
 import static com.example.android.questiontime.MainActivity.STATE_QUESTION_ARRAY;
 import static com.example.android.questiontime.MainActivity.chosenTopicList;
+import static com.example.android.questiontime.MainActivity.emailAddress;
 import static com.example.android.questiontime.MainActivity.fullQuestionArray;
 import static com.example.android.questiontime.MainActivity.playerScore;
+import static com.example.android.questiontime.MainActivity.user;
 
 /**
  * A fragment containing the profile screen where users can enter their name and email address.
@@ -43,12 +50,51 @@ public class ProfileScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final View rootView = inflater.inflate(R.layout.profile_screen, container, false);
         if(savedInstanceState != null){
             playerScore = savedInstanceState.getInt(STATE_PLAYER_SCORE);
             fullQuestionArray = savedInstanceState.getParcelableArrayList(STATE_QUESTION_ARRAY);
             chosenTopicList = savedInstanceState.getParcelableArrayList(STATE_CHOSEN_TOPICS);
         }
-        final View rootView = inflater.inflate(R.layout.profile_screen, container, false);
+
+        final EditText username = (EditText) rootView.findViewById(R.id.username);
+        final EditText email = (EditText) rootView.findViewById(R.id.email);
+
+
+        username.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) ||
+                        event.getAction() == EditorInfo.IME_ACTION_DONE ||
+                        event.getAction() == EditorInfo.IME_ACTION_SEARCH ||
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    user = username.getText().toString();
+                    Snackbar.make(rootView, getString(R.string.on_name_entry, ""+user), Snackbar.LENGTH_LONG).show();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        email.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) ||
+                        event.getAction() == EditorInfo.IME_ACTION_DONE ||
+                        event.getAction() == EditorInfo.IME_ACTION_SEARCH ||
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    emailAddress = email.getText().toString();
+                    Snackbar.make(rootView, getString(R.string.on_email_entry, ""+emailAddress), Snackbar.LENGTH_LONG).show();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
 
 
         return rootView;

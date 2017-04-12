@@ -12,7 +12,7 @@
     <TextView style="@style/QuestionStyle"
         android:id="@+id/welcome_message"
         android:text="@string/instructions"
-        android:layout_centerVertical="true"/>
+        android:layout_centerInParent="true"/>
 
     <TextView style="@style/BottomTextViewStyle"
         android:id="@+id/swipe_message"

@@ -19,8 +19,6 @@
     <string name="swipe">Swipe to continue</string>
     <string name="swipe_for_results">Swipe for results</string>
 
-    <string name="go">Let\s Go!</string>
-    <string name="play">Let\s Play!</string>
     <string name="close">Close</string>
 
     <string name="play_again">Play Again</string>
@@ -30,14 +28,22 @@
     <string name="username">Enter Username</string>
     <string name="email">Enter Email</string>
 
+    <string name="on_name_entry">Welcome <xliff:g id="name" example="Robbie">%s</xliff:g>!
+        Best of luck in your quest to seem intelligent.
+    </string>
+
+    <string name="on_email_entry">Don\'t worry, we\'ll send no span to:
+        <xliff:g id="email" example="you@gmail.com">%s</xliff:g>, we promise!
+    </string>
+
     <string name="result_message">
-        You scored: <xliff:g id="final_score" example="7">%s</xliff:g> out of
+        <xliff:g id="name" example="Robbie">%s</xliff:g>, you scored:
+        <xliff:g id="final_score" example="7">%s</xliff:g> out of
         <xliff:g id="questions_total" example="10">%s</xliff:g>
     </string>
 
     <string name="choice">Your Choice</string>
     <string name="answer">Correct Answer</string>
-
     <string name="submit">Get Results</string>
 
     <string-array name="question_topics">

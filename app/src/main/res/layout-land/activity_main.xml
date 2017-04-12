@@ -33,5 +33,30 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/container"
+        android:scaleType="center"
+        app:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ok"
+        android:layout_margin="@dimen/fab_margin"
+        android:onClick="compareAnswers"
+        android:visibility="invisible"
+        app:layout_anchorGravity="left|bottom" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/container"
+        app:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/restart"
+        android:layout_margin="@dimen/fab_margin"
+        android:onClick="restartGame"
+        android:visibility="invisible"
+        app:layout_anchorGravity="right|bottom"/>
+
 
 </android.support.design.widget.CoordinatorLayout>
